@@ -1,0 +1,209 @@
+<h1 aling=center.t1a02-vibe-code-cleaning-zach.html</h1>
+You need to put the cleaned code here. no CSS, no confusing divs/paragraphs. just as simple as possible webpage html. <br> <br>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Minesweeper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;}
+
+
+
+        #game-board {
+            display: grid;
+            border: 4px solid #999;
+            background-color: #ccc;
+        }
+
+        .cell {
+            width: 30px;
+            height: 30px;
+            background-color: #bbb;
+            border: 2px solid;
+            border-color: #ddd #777 #777 #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minesweeper</h1>
+    <div id="game-board"></div>
+    <div id="game-message"></div>
+    <button id="restart-button" style="display:none;">Restart Game</button>
+
+    <script>
+        const gameBoard = document.getElementById('game-board');
+        const gameMessage = document.getElementById('game-message');
+        const restartButton = document.getElementById('restart-button');
+        const boardSize = 10;
+        const mineCount = 10;
+        let board = [];
+        let isGameOver = false;
+        let cellsRevealed = 0;
+
+        function createBoard() {
+            gameBoard.innerHTML = '';
+            board = [];
+            isGameOver = false;
+            cellsRevealed = 0;
+            gameMessage.textContent = '';
+            restartButton.style.display = 'none';
+
+            gameBoard.style.gridTemplateColumns = `repeat(${boardSize}, 1fr)`;
+
+            for (let i = 0; i < boardSize; i++) {
+                board[i] = [];
+                for (let j = 0; j < boardSize; j++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.dataset.row = i;
+                    cell.dataset.col = j;
+                    board[i][j] = {
+                        isMine: false,
+                        isRevealed: false,
+                        isFlagged: false,
+                        mineCount: 0,
+                        element: cell
+                    };
+                    gameBoard.appendChild(cell);
+                    cell.addEventListener('click', handleLeftClick);
+                    cell.addEventListener('contextmenu', handleRightClick);
+                }
+            }
+
+            let minesPlaced = 0;
+            while (minesPlaced < mineCount) {
+                const row = Math.floor(Math.random() * boardSize);
+                const col = Math.floor(Math.random() * boardSize);
+                if (!board[row][col].isMine) {
+                    board[row][col].isMine = true;
+                    minesPlaced++;
+                }
+            }
+
+            for (let i = 0; i < boardSize; i++) {
+                for (let j = 0; j < boardSize; j++) {
+                    if (!board[i][j].isMine) {
+                        let count = 0;
+                        for (let dx = -1; dx <= 1; dx++) {
+                            for (let dy = -1; dy <= 1; dy++) {
+                                const newRow = i + dx;
+                                const newCol = j + dy;
+                                if (newRow >= 0 && newRow < boardSize && newCol >= 0 && newCol < boardSize && board[newRow][newCol].isMine) {
+                                    count++;
+                                }
+                            }
+                        }
+                        board[i][j].mineCount = count;
+                    }
+                }
+            }
+        }
+
+        function handleLeftClick(event) {
+            if (isGameOver) return;
+            const cell = event.target;
+            const row = parseInt(cell.dataset.row);
+            const col = parseInt(cell.dataset.col);
+            const cellData = board[row][col];
+
+            if (cellData.isRevealed || cellData.isFlagged) return;
+
+            if (cellData.isMine) {
+                revealMines();
+                gameMessage.textContent = 'Game Over! 💥';
+                isGameOver = true;
+                restartButton.style.display = 'block';
+            } else {
+                revealCell(row, col);
+                checkWin();
+            }
+        }
+
+        function handleRightClick(event) {
+            event.preventDefault();
+            if (isGameOver) return;
+            const cell = event.target;
+            const row = parseInt(cell.dataset.row);
+            const col = parseInt(cell.dataset.col);
+            const cellData = board[row][col];
+
+            if (cellData.isRevealed) return;
+
+            cellData.isFlagged = !cellData.isFlagged;
+            cell.classList.toggle('flag');
+            cell.textContent = cellData.isFlagged ? '🚩' : '';
+        }
+
+        function revealCell(row, col) {
+            if (row < 0 || row >= boardSize || col < 0 || col >= boardSize) return;
+            const cellData = board[row][col];
+            if (cellData.isRevealed || cellData.isFlagged) return;
+
+            cellData.isRevealed = true;
+            cellData.element.classList.add('revealed');
+            cellsRevealed++;
+
+            if (cellData.mineCount > 0) {
+                cellData.element.textContent = cellData.mineCount;
+                cellData.element.dataset.mines = cellData.mineCount;
+            } else {
+                for (let dx = -1; dx <= 1; dx++) {
+                    for (let dy = -1; dy <= 1; dy++) {
+                        revealCell(row + dx, col + dy);
+                    }
+                }
+            }
+        }
+
+        function revealMines() {
+            for (let i = 0; i < boardSize; i++) {
+                for (let j = 0; j < boardSize; j++) {
+                    const cellData = board[i][j];
+                    if (cellData.isMine) {
+                        cellData.element.classList.add('revealed', 'mine');
+                        cellData.element.textContent = '💣';
+                    }
+                }
+            }
+        }
+
+        function checkWin() {
+            const safeCells = (boardSize * boardSize) - mineCount;
+            if (cellsRevealed === safeCells) {
+                gameMessage.textContent = 'You Win! 🎉';
+                isGameOver = true;
+                restartButton.style.display = 'block';
+            }
+        }
+
+        restartButton.addEventListener('click', createBoard);
+
+        createBoard();
+    </script>
+</body>
+</html>
+<br> <br>
+Here is original vibecode <br>
+<iframe width="100%" height=400 src="t1a02-redo-vibe-code-clean-zach - Copy.html"></iframe>
+<br><br>
+Final comments:
+Less stylish,
+Shorter,
+more basic,
+both work
