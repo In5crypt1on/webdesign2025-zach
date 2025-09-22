@@ -31,11 +31,11 @@ Select Box: <br>
 </select><br><br>
 <input type="submit" value="Submit">
 <input type="reset" value="Reset">
-<input type="color">
-<input type="date">
-<input type="file">
-<input type="range">
-        <input list="genres" id="genre" name="genre">
+<input type="color"><br>
+<input type="date"><br>
+<input type="file"><br>
+<input type="range"><br>
+        <input list="genres" id="genre" name="genre"><br>
 
         <datalist id="genres">
             <option value="Action"></option>
@@ -45,10 +45,24 @@ Select Box: <br>
             <option value="Horror"></option>
             <option value="Science Fiction"></option>
             <option value="Thriller"></option>
-        </datalist>
-
-
+        </datalist><br>
+<p id="progressText">75% Complete</p>
+<meter id="progressMeter" value="75" min="0" max="100"></meter><br>
+<input type="range" id="progressSlider" min="0" max="100" value="75">
 
 
 
 </form>
+
+    <script>
+        const progressMeter = document.getElementById('progressMeter');
+        const progressText = document.getElementById('progressText');
+        const progressSlider = document.getElementById('progressSlider');
+
+        progressSlider.addEventListener('input', () => {
+            const newValue = progressSlider.value;
+            progressMeter.value = newValue;
+            progressText.textContent = newValue + '% Complete';
+        });
+    </script>
+
