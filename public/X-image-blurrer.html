@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Blurring Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1f2937;
+            color: #f9fafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-xl max-w-lg w-full text-center">
+        <h1 class="text-3xl font-bold mb-6">Image Blurring Tool</h1>
+        
+        <label for="imageUpload" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl cursor-pointer transition duration-300 ease-in-out">
+            Choose an Image
+        </label>
+        <input type="file" id="imageUpload" class="hidden" accept="image/*">
+        
+        <div class="mt-8 mb-6">
+            <label for="blurSlider" class="block text-xl font-medium mb-2">Blur Amount: <span id="blurValue">0</span>px</label>
+            <input type="range" id="blurSlider" min="0" max="20" value="0" step="1" class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-600 accent-blue-600">
+        </div>
+        
+        <div class="relative overflow-hidden rounded-xl shadow-lg mt-8">
+            <img id="previewImage" src="https://placehold.co/600x400/374151/e5e7eb?text=Upload+an+image" alt="Image preview" class="w-full h-auto transition-all duration-300 ease-in-out">
+        </div>
+    </div>
+
+    <script>
+        const imageUpload = document.getElementById('imageUpload');
+        const blurSlider = document.getElementById('blurSlider');
+        const previewImage = document.getElementById('previewImage');
+        const blurValueSpan = document.getElementById('blurValue');
+
+        // Handle image upload and display
+        imageUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    previewImage.src = event.target.result;
+                    // Reset blur when new image is loaded
+                    blurSlider.value = 0;
+                    previewImage.style.filter = 'blur(0px)';
+                    blurValueSpan.textContent = '0';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle blur slider
+        blurSlider.addEventListener('input', () => {
+            const blurAmount = blurSlider.value;
+            previewImage.style.filter = `blur(${blurAmount}px)`;
+            blurValueSpan.textContent = blurAmount;
+        });
+    </script>
+</body>
+</html>
