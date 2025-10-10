@@ -1,0 +1,297 @@
+<h2 align=center> t1a08-prompt-zach.html </h2>
+In pre tags write a prompt for a really interesting javascript HTML and CSS single file webpage. Add all other prompts in their own pre tag for anything else you do or any images you generate. Have this writing then the pre tags then the generated page. <br><br>
+
+
+Prompt 1:
+
+
+<pre>
+Make a single file html css and javascript page about Indie Games
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie Games</title>
+    <style>
+        /* Minimal Dark Theme */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #20232b; /* Darker background */
+            color: #e0e0e0; /* Light text */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Hero/Title */
+        .hero {
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-bottom: 1.5rem;
+            background-color: #30333d;
+            border-radius: 4px;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin: 0;
+            color: #7aa5d9; /* Blue highlight */
+        }
+
+        /* Section Title */
+        h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #e0e0e0;
+        }
+
+        /* Spotlight Layout (Simple Stacking) */
+        .spotlight-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Detail Panel */
+        .detail-panel {
+            background-color: #30333d;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .game-detail-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .game-image {
+            width: 100%;
+            height: auto;
+            max-height: 120px;
+            object-fit: cover;
+            border-radius: 2px;
+            border: 1px solid #7aa5d9;
+        }
+
+        .game-info h4 {
+            font-size: 1.25rem;
+            margin: 0 0 0.25rem 0;
+            color: white;
+        }
+        .game-info p.genre {
+            color: #7aa5d9;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .game-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: #7aa5d9;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .game-link:hover {
+            color: white;
+        }
+
+        /* Game Selection Buttons */
+        .game-btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .game-btn {
+            padding: 0.5rem;
+            border-radius: 2px;
+            background-color: #4b5563; /* Default button color */
+            color: white;
+            text-align: left;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.1s;
+        }
+        .game-btn:hover {
+            background-color: #5a6472;
+        }
+        .game-btn.active {
+            background-color: #7aa5d9; /* Active button highlight */
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            padding: 1rem;
+            text-align: center;
+            color: #909090;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+
+        <section class="hero">
+            <h2>Indie Game Spotlight</h2>
+        </section>
+
+        <section id="spotlight" class="container">
+            
+            <div class="spotlight-layout">
+                <div class="selection-panel">
+                    <p style="font-weight: bold; color: #7aa5d9;">Select a Title:</p>
+                    <div class="game-btn-group">
+                        <button data-game-id="stardew" class="game-btn">
+                            Stardew Valley
+                        </button>
+                        <button data-game-id="knight" class="game-btn">
+                            Hollow Knight
+                        </button>
+                        <button data-game-id="celeste" class="game-btn">
+                            Celeste
+                        </button>
+                        <button data-game-id="goose" class="game-btn">
+                            Untitled Goose Game
+                        </button>
+                    </div>
+                </div>
+
+                <div id="game-detail-card" class="detail-panel">
+                    <div class="game-detail-content">
+                        <img id="game-image" src="https://placehold.co/200x120/4f46e5/ffffff?text=Loading..." alt="Featured Game" class="game-image">
+                        <div class="game-info">
+                            <h4 id="game-title">Game Title</h4>
+                            <p id="game-genre" class="genre">Genre</p>
+                            <p id="game-description">Loading game description...</p>
+                            <a id="game-link" href="#" target="_blank" class="game-link">
+                                Read More &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; Indie Games Spotlight.</p>
+        </div>
+    </footer>
+
+    <script>
+        const indieGames = {
+            stardew: {
+                title: "Stardew Valley",
+                genre: "Life Sim, RPG",
+                description: "Inherit a farm and restore the valley. Grow crops, fish, mine, and explore a charming, endless world.",
+                link: "https://en.wikipedia.org/wiki/Stardew_Valley",
+                image: "https://placehold.co/200x120/54A940/ffffff?text=Farm"
+            },
+            knight: {
+                title: "Hollow Knight",
+                genre: "Metroidvania",
+                description: "Explore the depths of a forgotten insect kingdom in this challenging, beautifully hand-drawn 2D adventure.",
+                link: "https://en.wikipedia.org/wiki/Hollow_Knight",
+                image: "https://placehold.co/200x120/0E0E1A/ffffff?text=Bug"
+            },
+            celeste: {
+                title: "Celeste",
+                genre: "Platformer",
+                description: "Help Madeline climb Celeste Mountain. Famous for tight controls, challenging levels, and a moving story.",
+                link: "https://en.wikipedia.org/wiki/Celeste_(video_game)",
+                image: "https://placehold.co/200x120/FF57A8/ffffff?text=Mountain"
+            },
+            goose: {
+                title: "Untitled Goose Game",
+                genre: "Stealth, Puzzle",
+                description: "Play as a horrible goose set loose on a village to steal things and wreak havoc. Honk!",
+                link: "https://en.wikipedia.org/wiki/Untitled_Goose_Game",
+                image: "https://placehold.co/200x120/F5C249/000000?text=Goose"
+            }
+        };
+
+        const gameDetailCard = document.getElementById('game-detail-card');
+        const gameTitle = document.getElementById('game-title');
+        const gameGenre = document.getElementById('game-genre');
+        const gameDescription = document.getElementById('game-description');
+        const gameLink = document.getElementById('game-link');
+        const gameImage = document.getElementById('game-image');
+        const gameButtons = document.querySelectorAll('.game-btn');
+        let activeGameId = null;
+
+        function updateSpotlight(gameId) {
+            if (activeGameId === gameId) return;
+
+            const game = indieGames[gameId];
+            if (!game) return;
+
+            // Simple update without transitions
+            gameTitle.textContent = game.title;
+            gameGenre.textContent = game.genre;
+            gameDescription.textContent = game.description;
+            gameLink.href = game.link;
+            gameLink.textContent = `Read More about ${game.title} →`;
+            gameImage.src = game.image;
+            gameImage.alt = game.title;
+            
+            // Update active button state
+            gameButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const currentBtn = document.querySelector(`.game-btn[data-game-id="${gameId}"]`);
+            if (currentBtn) {
+                currentBtn.classList.add('active');
+            }
+
+            activeGameId = gameId;
+        }
+
+        gameButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const gameId = event.target.dataset.gameId;
+                updateSpotlight(gameId);
+            });
+        });
+
+        window.onload = function() {
+            const firstGameId = Object.keys(indieGames)[0];
+            if (firstGameId) {
+                updateSpotlight(firstGameId);
+            }
+        };
+    </script>
+</body>
+</html>
+
+
+</pre>
+
+Prompt 2:
+
+
+<pre>
+
+</pre>
+Image prompt:
+
+<pre>
+
+‹/pre>
+You include every prompt you used to make your final page‹br›
+﻿
