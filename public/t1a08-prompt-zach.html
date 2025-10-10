@@ -282,7 +282,151 @@ Make a single file html css and javascript page about Indie Games
 
 </pre>
 
-Prompt 2:
+Prompt 2: Make a simple webpage about Triple A games
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The World of AAA Games</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Set font and a dark background for a cinematic feel */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #e5e7eb; /* Light gray text */
+        }
+        .text-gradient {
+            background-image: linear-gradient(45deg, #f97316, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased">
+
+    <!-- Header & Hero Section -->
+    <header class="bg-gray-900 shadow-xl">
+        <div class="container mx-auto p-4 flex justify-between items-center">
+            <h1 class="text-3xl font-extrabold text-gradient">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block mr-2 align-text-bottom" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3 .895-3 2s1.343 2 3 2m0-8v8m0-8H9m3 8h3m-3-4H9m3 0h3m-3-4v8m-3-4H9m6 0h-3" />
+                </svg>
+                AAA Spotlight
+            </h1>
+            <nav class="hidden md:block">
+                <a href="#definition" class="text-gray-400 hover:text-white mx-3 transition duration-150">Definition</a>
+                <a href="#examples" class="text-gray-400 hover:text-white mx-3 transition duration-150">Examples</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 md:py-20 max-w-6xl">
+
+        <!-- Hero Content -->
+        <section class="text-center mb-16">
+            <h2 class="text-5xl md:text-7xl font-black mb-4 leading-tight">
+                The <span class="text-gradient">Blockbusters</span> of Gaming
+            </h2>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                Explore the world of Triple-A (AAA) games: the highest-budget, highest-profile titles that define the cutting edge of the video game industry.
+            </p>
+        </section>
+
+        <!-- Definition Section -->
+        <section id="definition" class="mb-20 bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl border border-gray-700">
+            <h3 class="text-4xl font-bold mb-6 text-orange-400">What is a AAA Game?</h3>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-lg text-gray-300 mb-4">
+                        The term "AAA" (pronounced "Triple-A") is an informal classification used within the video game industry to signify games produced and marketed by large, major publishers.
+                    </p>
+                    <p class="text-lg text-gray-300 mb-4 font-semibold">
+                        These titles are characterized by three primary factors:
+                    </p>
+                    <ul class="space-y-3 text-gray-400 list-disc list-inside ml-4">
+                        <li><span class="text-white font-medium">Massive Budgets:</span> Development and marketing costs often exceed tens or even hundreds of millions of dollars.</li>
+                        <li><span class="text-white font-medium">High Production Values:</span> Expect state-of-the-art graphics, cinematic scores, full voice acting, and complex physics engines.</li>
+                        <li><span class="text-white font-medium">Large Development Teams:</span> Teams frequently comprise hundreds of developers, artists, and engineers, spanning multiple years of production.</li>
+                    </ul>
+                </div>
+                <!-- Placeholder Image for Concept -->
+                <div class="hidden md:block">
+                    <img src="https://placehold.co/600x400/1f2937/d1d5db?text=HIGH+PRODUCTION+VALUE" 
+                         alt="Conceptual image representing high-budget video game production" 
+                         class="rounded-lg shadow-lg w-full h-auto object-cover transform hover:scale-[1.02] transition duration-300"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/d1d5db?text=Concept+Art';">
+                </div>
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section id="examples" class="mb-20">
+            <h3 class="text-4xl font-bold text-center mb-12 text-orange-400">Defining Examples</h3>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <!-- Example Card 1 -->
+                <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 border border-gray-700">
+                    <img src="https://placehold.co/600x350/2563eb/ffffff?text=FANTASY+RPG" 
+                         alt="Placeholder image for a fantasy RPG game" 
+                         class="w-full h-48 object-cover"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x350/2563eb/ffffff?text=Fantasy+RPG';">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold mb-2 text-white">Elden Ring (2022)</h4>
+                        <p class="text-sm font-medium text-orange-400 mb-4">Open World Action RPG</p>
+                        <p class="text-gray-400 text-sm">
+                            A prime example of modern AAA scope, featuring a massive interconnected world, deep lore, and challenging gameplay that set a new standard for the genre.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Example Card 2 -->
+                <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 border border-gray-700">
+                    <img src="https://placehold.co/600x350/dc2626/ffffff?text=CYBERPUNK+FPS" 
+                         alt="Placeholder image for a futuristic FPS game" 
+                         class="w-full h-48 object-cover"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x350/dc2626/ffffff?text=Futuristic+FPS';">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold mb-2 text-white">Cyberpunk 2077 (2020)</h4>
+                        <p class="text-sm font-medium text-orange-400 mb-4">Immersive Role-Playing</p>
+                        <p class="text-gray-400 text-sm">
+                            Demonstrates the ambition and financial risk involved, delivering a densely populated, visually stunning sci-fi metropolis with complex character narratives.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Example Card 3 -->
+                <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 border border-gray-700">
+                    <img src="https://placehold.co/600x350/10b981/ffffff?text=THIRD-PERSON+ACTION" 
+                         alt="Placeholder image for a third-person action game" 
+                         class="w-full h-48 object-cover"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x350/10b981/ffffff?text=Action+Adventure';">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold mb-2 text-white">God of War Ragnarök (2022)</h4>
+                        <p class="text-sm font-medium text-orange-400 mb-4">Cinematic Action-Adventure</p>
+                        <p class="text-gray-400 text-sm">
+                            Represents the pinnacle of cinematic storytelling and highly polished combat mechanics, often exclusive to major console platforms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 p-6 text-center text-gray-500">
+        <p class="text-sm">&copy; 2025 AAA Spotlight. Content for informational purposes only. All game titles are trademarks of their respective owners.</p>
+    </footer>
+
+</body>
+</html>
+
 
 
 <pre>
@@ -295,3 +439,4 @@ Image prompt:
 ‹/pre>
 You include every prompt you used to make your final page‹br›
 ﻿
+
