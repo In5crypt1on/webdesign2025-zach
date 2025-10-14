@@ -1,0 +1,83 @@
+<h1 align=center> t1a09-javascript-research-zach </h1>
+
+
+<script>
+let age = 12;
+
+if ( age > 14 || age < 90) {
+  alert( 'Welcome' );
+} else {
+alert ('LEAVE');
+}
+
+
+</script>
+
+<pre>
+Alert brings up a alert box
+prompt brings up a prompt box
+Confim Brings up a cofirm box
+Bitwise operators treat arguments as 32-bit integer numbers and work on the level of their binary representation.
+These operators are not JavaScript-specific. They are supported in most programming languages.
+These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won’t need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful.
+
+
+<h3> MATH </h3>
+++_____=immidet increase
+_____++=increase after currnt task 
+(*=)= multiply number by everything after equals
+add a (+) before a Prompt to make the numbers add
+== means equality test
+< and > mean less than and Greater than
+= means a assignment (ex: A= prompt(...);)
+=== checks equality without type conversion
+
+<h3> If, Else, ?, and other stuff </h3>
+If (...) statement evaluates a condition in parentheses and if its true executes code
+Else is if the If statement is falsy
+? has a condition behind it and if true does value1 before the :, if not does value after the colon
+
+<h3> Logical operators </h3>
+<ul> The list of operators:
+<li> AND ( && )
+<li> OR ( || )
+<li> NOT ( ! )
+<li> Nullish Coalescing (??)
+</ul>
+OR: Shows first Truthy statement if all others are false, will only show false if all statement are false
+AND: Opposite of OR, and is more powerful
+NOT: Inverses Value (true becomes false, false becomes true)
+Nullish Coalescing: shows first non Null value
+
+			
+			let hour = 12;
+
+			if (hour < 10 || hour > 18) {
+			  alert( 'The office is closed.' );
+			}
+
+
+
+
+
+TASK 1:
+5 > 4 = true
+"apple" > "pineapple" = false
+"2" > "12" = true
+undefined == null = true
+undefined === null = false
+null == "\n0\n" = false
+null === +"\n0\n" = false
+
+TASK 2:
+let java = prompt(`What's the official name of JavaScript?`, '');
+
+if (java == 'ECMAScript') {
+  alert('Right!');
+} else {
+  alert("You don't know? ECMAScript!");
+}
+
+
+
+ 
