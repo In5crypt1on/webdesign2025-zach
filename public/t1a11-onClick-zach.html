@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max-Viewport Glowing Rounded Card</title>
+    <script src="https://cdn.tailwindcss.com">
+theme: {
+                extend: {
+                    colors: {
+
+                        '#FF00FF': '#FF00FF',
+                        '#FF4c4c': '#FF4c4c',
+                        '#FF8000': '#FF8000',
+                        '#1D4ED8': '#1D4ED8',
+                        '#10B981': '#10B981',
+                        '#6D28D9': '#6D28D9',
+                    },
+                },
+            },
+        };</script>
+    <style>
+@keyframes rainbow-glow {
+    0%   {
+        box-shadow: 
+            0 0 70px rgba(255, 0, 0, 0.9), 
+            0 0 70px 10px rgba(255, 0, 0, 0.5), 
+            0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    16%  {
+        box-shadow: 
+            0 0 70px rgba(155, 0, 55, 0.9), 
+            0 0 70px 10px rgba(155, 0, 55, 0.5), 
+            0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    33%  {
+        box-shadow: 
+            0 0 70px rgba(55, 0, 155, 0.9), 
+            0 0 70px 10px rgba(55, 0, 155, 0.5), 
+            0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    50%  {
+        box-shadow: 
+            0 0 30px rgba(0, 0, 255, 0.9), 
+            0 0 70px 10px rgba(0, 0, 255, 0.5), 
+            0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    66%  {
+        box-shadow: 
+            0 0 70px rgba(55, 0, 155, 0.9), 
+            0 0 70px 10px rgba(55, 0, 155, 0.5), 
+            0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    83% {
+        box-shadow: 
+            0 0 70px rgba(155, 0, 55, 0.9), 
+            0 0 70px 10px rgba(155, 0, 55, 0.5), 
+            0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    100% {
+        box-shadow: 
+            0 0 70px rgba(255, 0, 0, 0.9), 
+            0 0 70px 10px rgba(255, 0, 0, 0.5), 
+            0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+}
+
+@keyframes border-fun {
+  from {border-color: #FF0000;}
+  to {border-color: #000000;}
+}
+
+
+
+
+
+
+.card-glow {
+animation: rainbow-glow 2s linear infinite,
+border-fun 2s linear infinite;
+border:17px outset;
+}
+
+code {
+border-radius: 20%;
+border: 1px solid black;
+background-color: #BBBBBB;
+     }
+h3 {
+border-radius: 12%;
+border: 1px solid red;
+background-color: #550050;
+display: inline;
+color: #FF00FF;
+ box-shadow:
+0 0 30px rgba(75, 0, 130, 0.3), 
+0 0 90px 17px rgba(75, 0, 130, 0.5), 
+0 20px 40px rgba(0, 0, 0, 0.3);'
+transition: transform 0.5s ease;
+}
+
+h3:hover {
+transform: scale(1.2);
+}
+
+.twix {
+box-shadow: 0 0 30px 1px #A0A0A0;
+border:6px inset black;
+}
+.message-box {
+z-index: 1000;
+transition: opacity 0.3s ease;
+}
+.lift-div {
+    width: 300px; 
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.is-raised {
+    transform: translateX(20px); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body class="bg-gray-600 min-h-screen min-w-screen flex items-center justify-center p-4" style="color: white;">
+    <div id="customMessageBox" class="message-box fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center opacity-0 pointer-events-none">
+
+        <div class="bg-indigo-600 rounded-xl p-8 max-w-sm w-full text-center shadow-2xl transform transition-transform duration-300 scale-90">
+
+            <h2 class="text-3xl font-bold mb-4">Hello!</h2>
+
+            <p class="text-white text-lg mb-6">This is your custom "alert" box.</p>
+
+            <button onclick="hideMessageBox()" class="w-full bg-white text-indigo-700 font-extrabold py-3 rounded-xl hover:bg-gray-200 transition duration-150 shadow-md">
+
+                Got It
+            </button>
+
+        </div>
+
+    </div>
+
+
+<div class="bg-gray-900 w-[90vw] rounded-2xl  p-12 transition-all duration-500 card-glow divBorder">
+<h1 align=center class="text-4xl font-extrabold mb-3 text-white"> t1a11-onClick-zach.html</h1>
+
+
+
+<button onclick="showMessageBox()" class="w-full text-white font-bold py-3 px-4 rounded-xl shadow-lg mb-4 
+    transition-all ease-in-out duration-700
+    bg-gradient-to-r from-[#FF00FF] via-[#FF4c4c] to-[#FF8000] 
+    hover:bg-gradient-to-r hover:from-[#1D4ED8] hover:via-[#10B981] hover:to-[#6D28D9]">
+    Show Alert
+</button><br>
+
+
+<div class="mx-auto bg-gray-400 rounded-2xl p-1 twix inline-block text-base">
+	<div id="myDiv01" class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base">
+		...
+	</div><br>
+  <div id="myDiv01" class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base">
+    <button onClick="{
+		const myDiv = document.getElementById('myDiv01')
+		myDiv.innerHTML = 'hello'
+	}"> To Div
+    </button>
+  </div>
+</div>
+<br>
+
+<div class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base">
+
+This is 
+<b onMouseOver="{document.body.style.backgroundColor = 'yellow';}" >
+Bold and change background 
+</b> this isn't.
+</div><br>
+
+<div class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base">
+
+<b onMouseOver="this.textContent='Get Off Me'" onMouseOut="this.textContent='Thanks'">
+Hover Mouse Here
+</b>
+</div><br>
+
+<div class="mx-auto bg-gray-400 rounded-2xl p-1 twix inline-block text-base">
+
+<div id="myDiv02" class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base">...</div><br>
+
+<div class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base">
+<button ondblClick="{
+const myDiv = document.getElementById('myDiv02')
+myDiv.innerHTML = 'You Did It'}">
+Double Click Me
+</button></div>
+</div><br>
+
+<div id="myDiv03" class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base">
+ <button onmousedown="{document.getElementById('myDiv03').style.backgroundColor='red';}"
+  onmouseup="{document.getElementById('myDiv03').style.backgroundColor='Blue';}"> 
+   Click Me
+ </button></div><br>
+
+<div id="myDiv04" class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base">
+ <button onkeydown="{document.getElementById('myDiv04').style.backgroundColor='red';}"
+  onkeyup="{document.getElementById('myDiv04').style.backgroundColor='Blue';}"> 
+   Click Me then press on your keyboard
+ </button></div><br>
+
+<div id="myDiv05" class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base">
+ <button onclick="{document.getElementById('myDiv05').style.backgroundColor='red';}"> 
+   Click Me
+ </button></div><br>
+
+<div id="myDiv06" class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base" onmouseover="this.classList.add('is-raised')"
+onmouseout="this.classList.remove('is-raised')">
+The text will move right
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div> 
+    <script>
+        const messageBox = document.getElementById('customMessageBox');
+        const contentBox = messageBox.querySelector('div');
+
+        function showMessageBox() {
+            messageBox.classList.remove('opacity-0', 'pointer-events-none');
+            contentBox.classList.remove('scale-90');
+            contentBox.classList.add('scale-100');
+        }
+
+        function hideMessageBox() {
+            contentBox.classList.remove('scale-100');
+            contentBox.classList.add('scale-90');
+            
+            setTimeout(() => {
+                messageBox.classList.add('opacity-0', 'pointer-events-none');
+            }, 300);
+        }
+    </script>
+ 
+
+
+
+</body>
+</html>
