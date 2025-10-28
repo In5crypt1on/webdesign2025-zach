@@ -105,7 +105,7 @@ transform: scale(1.2);
 
 .twix {
 box-shadow: 0 0 30px 1px #A0A0A0;
-border:6px inset black;
+border:5px inset #514051;
 }
 .message-box {
 z-index: 1000;
@@ -135,13 +135,13 @@ transition: opacity 0.3s ease;
 <body class="bg-gray-600 min-h-screen min-w-screen flex items-center justify-center p-4" style="color: white;">
     <div id="customMessageBox" class="message-box fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center opacity-0 pointer-events-none">
 
-        <div class="bg-indigo-600 rounded-xl p-8 max-w-sm w-full text-center shadow-2xl transform transition-transform duration-300 scale-90">
+        <div class="mx-auto bg-gray-800 rounded-2xl p-1 twix inline-block text-base">
 
             <h2 class="text-3xl font-bold mb-4">Hello!</h2>
 
             <p class="text-white text-lg mb-6">This is your custom "alert" box.</p>
 
-            <button onclick="hideMessageBox()" class="w-full bg-white text-indigo-700 font-extrabold py-3 rounded-xl hover:bg-gray-200 transition duration-150 shadow-md">
+            <button onclick="hideMessageBox()" class="mx-auto bg-gray-400 rounded-2xl p-1 twix inline-block text-base">
 
                 Got It
             </button>
@@ -225,7 +225,12 @@ Double Click Me
 <div id="myDiv06" class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base" onmouseover="this.classList.add('is-raised')"
 onmouseout="this.classList.remove('is-raised')">
 The text will move right
-</div>
+</div><br>
+
+<div id="myDiv07" class="mx-auto bg-gray-500 rounded-2xl p-1 twix inline-block text-base">
+<input type="text" id="inputBox" placeholder="Type here, box will change" style="color: Red; background-color: transparent; border: none; outline: none;"  onchange="{document.getElementById('myDiv07').style.backgroundColor='Blue';}">
+
+
 
 
 
@@ -255,7 +260,8 @@ The text will move right
             setTimeout(() => {
                 messageBox.classList.add('opacity-0', 'pointer-events-none');
             }, 300);
-        }
+}
+
     </script>
  
 
