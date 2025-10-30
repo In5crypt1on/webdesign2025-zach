@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Interactive Spinner</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the spinner */
+        :root {
+            --spinner-rotation: 0deg;
+        }
+
+        /* The main spinner container */
+        .spinner {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 12px solid #3b82f6; /* Blue border */
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.5);
+            /* Conic gradient for the segmented wheel look (8 segments) */
+            background: conic-gradient(
+                #ef4444 0deg 45deg,    /* Red */
+                #f59e0b 45deg 90deg,   /* Amber */
+                #10b981 90deg 135deg,  /* Emerald */
+                #3b82f6 135deg 180deg, /* Blue */
+                #8b5cf6 180deg 225deg, /* Violet */
+                #ec4899 225deg 270deg, /* Pink */
+                #eab308 270deg 315deg, /* Yellow */
+                #06b6d4 315deg 360deg  /* Cyan */
+            );
+            /* Apply the dynamic rotation and transition */
+            transform: rotate(var(--spinner-rotation));
+            transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1); /* Slower, smooth easing for deceleration */
+            cursor: grab; /* Indicate it's draggable */
+        }
+        
+        /* State when dragging is active */
+        .spinner-container.dragging .spinner {
+            box-shadow: 0 0 50px rgba(234, 179, 8, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.7);
+            cursor: grabbing;
+        }
+
+        /* The pointer/indicator above the wheel */
+        .pointer {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #fff; /* White arrow body */
+            filter: drop-shadow(0 0 5px #000); /* Shadow for contrast */
+            position: absolute;
+            top: 20px; /* Position it above the spinner */
+            z-index: 10;
+        }
+
+        /* Styling for the central pivot point */
+        .pivot {
+            width: 40px;
+            height: 40px;
+            background-color: #fca5a5;
+            border-radius: 50%;
+            border: 6px solid #b91c1c;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            position: absolute;
+            z-index: 20;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 640px) {
+            .spinner {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen flex items-center justify-center p-4 font-sans text-white">
+
+    <div class="flex flex-col items-center space-y-8 max-w-lg w-full bg-gray-800 p-8 rounded-xl shadow-2xl">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-blue-400">Flick the Wheel!</h1>
+        <p class="text-gray-300 text-center text-xl font-medium">Click and drag quickly on the wheel to spin it.</p>
+
+        <!-- Spinner Area - Now the interactive zone -->
+        <div id="spinnerArea" class="spinner-container relative flex justify-center items-center h-80 w-80 sm:h-96 sm:w-96">
+            <!-- The fixed pointer/indicator -->
+            <div class="pointer transform -translate-y-1/2 -mt-10"></div>
+            
+            <!-- The dynamic spinner element -->
+            <div id="spinner" class="spinner flex justify-center items-center">
+            </div>
+
+            <!-- The central pivot -->
+            <div class="pivot"></div>
+        </div>
+
+        <!-- Spin Button - Now primarily a visual element or "Spin Again" prompt -->
+        <button id="spinButton"
+                class="px-8 py-4 bg-yellow-500 text-gray-900 font-bold text-lg rounded-full shadow-lg transition duration-150 ease-in-out hover:bg-yellow-400 active:bg-yellow-600 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed">
+            SPIN NOW
+        </button>
+
+        <!-- Result/Message Box -->
+        <div id="messageBox" class="text-center text-lg h-8">
+            <!-- Messages will appear here -->
+        </div>
+    </div>
+
+    <script>
+        const spinner = document.getElementById('spinner');
+        const spinnerArea = document.getElementById('spinnerArea');
+        const spinButton = document.getElementById('spinButton');
+        const messageBox = document.getElementById('messageBox');
+
+        // State variables for the wheel
+        let currentTotalRotation = 0;
+        const segmentAngle = 45; // 8 segments * 45 degrees = 360
+        let spinning = false; // Flag to prevent multiple concurrent spins
+
+        // State variables for flick detection
+        let isDragging = false;
+        let lastTime = 0;
+        let lastX = 0;
+        let lastY = 0;
+        let velocityX = 0;
+        let velocityY = 0;
+
+
+
+        /**
+         * Converts the final angle into a segment index and displays the result.
+         * @param {number} finalAngle - The final degree of rotation (0-360).
+         */
+        function displayResult(finalAngle) {
+            const normalizedAngle = finalAngle % 360;
+            // Reverse the angle because the wheel is spinning clockwise against the static pointer.
+            const reversedAngle = 360 - normalizedAngle; 
+
+            // Calculate the index (0 to 7)
+            const index = Math.floor(reversedAngle / segmentAngle) % results.length;
+            
+            // Show the result
+            messageBox.textContent = results[index];
+            messageBox.classList.remove('text-red-400');
+            messageBox.classList.add('text-yellow-300', 'font-semibold');
+        }
+
+        /**
+         * Main function to handle the spin action, now accepting a base power/speed.
+         * @param {number} power - A value (e.g., 0 to 100) representing the flick strength.
+         */
+        function spinWheel(power) {
+            spinning = true;
+
+            // Simple threshold check for a too-slow drag
+            if (power < 5) {
+                spinning = false;
+                messageBox.textContent = "Flick harder to spin!";
+                messageBox.classList.remove('text-yellow-300');
+                messageBox.classList.add('text-red-400', 'font-semibold');
+                return;
+            }
+            
+            // Disable interaction while spinning
+            spinButton.disabled = true;
+            spinButton.textContent = 'Spinning...';
+            messageBox.textContent = '...';
+            
+            // Map the power (e.g., 5-100) to total rotation degrees (e.g., min 5 full spins to max 15 full spins)
+            const minRotation = 1800; // 5 * 360
+            const maxRotation = 5400; // 15 * 360
+            
+            // Normalize power (clamped at 5 for min, 50 for max effective power)
+            const clampedPower = Math.min(50, Math.max(5, power));
+            const normalizedPower = (clampedPower - 5) / 45; // Scale to 0-1 range
+            
+            // Calculate rotation degrees based on power
+            const rotationDegreesFromPower = minRotation + (maxRotation - minRotation) * normalizedPower;
+
+            // 2. Calculate the specific landing angle (0 to 359 degrees)
+            const landingAngle = Math.floor(Math.random() * 360);
+
+            // 3. Calculate the new total rotation (negative for clockwise spin)
+            const newRotation = currentTotalRotation - (rotationDegreesFromPower + landingAngle);
+
+            // 4. Update the CSS variable, triggering the transition
+            spinner.style.setProperty('--spinner-rotation', `${newRotation}deg`);
+
+            // 5. Update the internal tracker for the next spin
+            currentTotalRotation = newRotation;
+
+            // 6. Wait for the transition to finish (4 seconds as defined in CSS)
+            setTimeout(() => {
+                // Re-enable interaction and display result
+                spinning = false;
+                spinButton.disabled = false;
+                spinButton.textContent = 'SPIN AGAIN';
+                
+                // Calculate the final resting angle
+                const finalRestingAngle = Math.abs(currentTotalRotation) % 360;
+                displayResult(finalRestingAngle);
+
+            }, 4000); // Must match the CSS transition duration
+        }
+
+        // --- Flick/Drag Event Listeners ---
+        
+        // Remove old click handler from the button
+        spinButton.removeEventListener('click', spinWheel);
+
+        // Add a placeholder message when the button is clicked (since it's not the primary trigger)
+        spinButton.addEventListener('click', () => {
+            if (!spinning) {
+                messageBox.textContent = 'Flick the wheel to spin!';
+                messageBox.classList.remove('text-yellow-300');
+                messageBox.classList.add('text-red-400', 'font-semibold');
+            }
+        });
+
+        // Pointer Down: Start tracking
+        spinnerArea.addEventListener('pointerdown', (e) => {
+            if (e.button !== 0 && e.pointerType === 'mouse') return; // Only left-click
+            if (spinning) return;
+            
+            isDragging = true;
+            spinnerArea.setPointerCapture(e.pointerId); // Capture pointer for smooth dragging
+            spinnerArea.classList.add('dragging');
+            
+            // Reset velocity trackers
+            lastTime = performance.now();
+            lastX = e.clientX;
+            lastY = e.clientY;
+            velocityX = 0;
+            velocityY = 0;
+            
+            // Clear message box
+            messageBox.textContent = 'Ready...';
+            messageBox.classList.remove('text-red-400', 'text-yellow-300');
+            messageBox.classList.add('text-gray-400');
+        });
+
+        // Pointer Move: Calculate velocity
+        spinnerArea.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+
+            const currentTime = performance.now();
+            const deltaTime = currentTime - lastTime;
+            
+            const dx = e.clientX - lastX;
+            const dy = e.clientY - lastY;
+            
+            // Calculate velocity (pixels/millisecond)
+            // Use Math.abs(dx) and Math.abs(dy) for robust detection regardless of flick direction
+            velocityX = dx / deltaTime; 
+            velocityY = dy / deltaTime;
+            
+            // Update last positions/time
+            lastTime = currentTime;
+            lastX = e.clientX;
+            lastY = e.clientY;
+        });
+
+        // Pointer Up: Initiate spin based on velocity
+        spinnerArea.addEventListener('pointerup', (e) => {
+            if (!isDragging || spinning) return;
+
+            isDragging = false;
+            spinnerArea.releasePointerCapture(e.pointerId);
+            spinnerArea.classList.remove('dragging');
+
+            // Calculate total flick velocity (magnitude)
+            const magnitude = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+            
+            // Convert magnitude (pixels/ms) to a "power" score (e.g., 0-100)
+            const power = magnitude * 100; // Multiplier to scale the velocity to a usable range
+            
+            // Initiate spin
+            spinWheel(power);
+            
+            // Reset velocities
+            velocityX = 0;
+            velocityY = 0;
+        });
+    </script>
+</body>
+</html>
