@@ -26,7 +26,7 @@
         let scene, camera, renderer, controls;
         let world, boxBody, boxMesh;
         const timeStep = 1 / 60; // Physics time step
-        const moveForce = 20; // Magnitude of the impulse applied by WASD
+        const moveForce = 30; // Magnitude of the impulse applied by WASD
 
         /**
          * Initializes the Three.js scene, camera, and renderer.
@@ -96,6 +96,18 @@
             boxBody.addShape(boxShape);
             boxBody.position.set(0, 5, 0); // Start 5 units in the air
             world.addBody(boxBody);
+
+ // 3. Create a Pushable Sphere (The obstacle/target)
+            const sphereMass = 2; // Lighter mass than the box
+            const sphereRadius = 0.5;
+            const sphereShape = new CANNON.Sphere(sphereRadius);
+            sphereBody = new CANNON.Body({ mass: sphereMass });
+            sphereBody.addShape(sphereShape);
+            sphereBody.position.set(2, 5, -2); // Start off to the side, slightly elevated
+            world.addBody(sphereBody);
+
+
+
         }
 
         /**
@@ -137,16 +149,33 @@
 
             // Box Mesh (Wood-like appearance)
             const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+            const textureLoader = new THREE.TextureLoader();
+            const woodTexture = textureLoader.load('https://threejs.org/examples/textures/crate.gif'); 
+
             const boxMaterial = new THREE.MeshStandardMaterial({ 
-                color: 0x8b4513, // Saddle Brown color
-                roughness: 0.8,
-                metalness: 0.1
+                map: woodTexture, // Assign the loaded texture
+                color: 0x00ff00, // Set color to white to show the texture's true colors
+                roughness: 0.1,
+                metalness: 0.3
             });
             boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
             boxMesh.castShadow = true;
             boxMesh.receiveShadow = true;
             boxMesh.position.y = 5; // Initial position
             scene.add(boxMesh);
+
+// Sphere Mesh (Orange ball - pushable object)
+            const sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+            const sphereMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0xff0000, // Bright Orange color
+                roughness: 0.3, 
+                metalness: 0.5
+            });
+            sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
+            sphereMesh.castShadow = true;
+            sphereMesh.receiveShadow = true;
+            sphereMesh.position.set(2, 5, -2); // Initial position matches Cannon body
+            scene.add(sphereMesh);
         }
         
         /**
@@ -204,12 +233,23 @@
             // 2. Sync Three.js mesh with Cannon.js body position and rotation
             boxMesh.position.copy(boxBody.position);
             boxMesh.quaternion.copy(boxBody.quaternion);
+
+            // Sphere Sync (New)
+            sphereMesh.position.copy(sphereBody.position);
+            sphereMesh.quaternion.copy(sphereBody.quaternion); // Quaternions are used even for spheres, though rotation is less noticeable
+
             
             // If the box falls too far, reset it (e.g., if it rolls off the plane)
-            if (boxBody.position.y < -10) {
+            if (boxBody.position.y < -1) {
                 boxBody.position.set(0, 5, 0); // Reset position
                 boxBody.velocity.set(0, 0, 0);   // Stop movement
                 boxBody.angularVelocity.set(0, 0, 0); // Stop rotation
+            }
+
+            if (sphereBody.position.y < 1) {
+                sphereBody.position.set(0, 5, 0); // Reset position
+                sphereBody.velocity.set(0, 0, 0);   // Stop movement
+                sphereBody.angularVelocity.set(0, 0, 0); // Stop rotation
             }
 
 
