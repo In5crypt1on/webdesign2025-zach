@@ -3,40 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Modern & Well-Structured Webpage</title>
-    
+    <title>t1a01-proper-webpage-zach (Themed)</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-bg': 'var(--primary-bg)',
+                        'secondary-bg': 'var(--secondary-bg)',
+                        'accent': 'var(--accent-color)',
+                        'text-primary': 'var(--text-color)',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
+        :root {
+            --primary-bg: #1f2937;
+            --secondary-bg: #374151;
+            --text-color: #f9fafb;
+            --accent-color: #60a5fa;
+        }
+
+        .light-mode {
+            --primary-bg: #f3f4f6;
+            --secondary-bg: #ffffff;
+            --text-color: #1f2937;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            background-color: #1f2937;
-            color: #f9fafb; 
+            background-color: var(--primary-bg);
+            color: var(--text-color);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .content-card {
-            background-color: #374151;
+            background-color: var(--secondary-bg);
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             text-align: center;
             width: 100%;
-	    height: 100%;
+            max-width: 500px;
+            height: auto;
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
 
         h1 {
-            color: #60a5fa; /* Vibrant blue accent */
+            color: var(--accent-color);
             font-weight: 700;
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-size: 2em;
+            transition: color 0.3s;
         }
 
         p {
@@ -45,46 +76,172 @@
         }
 
         a {
-            color: #34d399; /* Bright green for contrast */
+            color: #34d399;
             text-decoration: none;
             transition: color 0.3s ease;
             font-weight: 700;
         }
 
         a:hover {
-            color: #10b981; /* Darker green on hover */
+            color: #10b981;
             text-decoration: underline;
         }
 
         .hover-image {
-            width: 150px; /* Made image slightly larger */
+            width: 150px;
             height: auto;
-            border-radius: 10px; /* Soft edges */
-            border: 3px solid #60a5fa; /* Accent border */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: block; /* Ensures proper spacing */
+            border-radius: 10px;
+            border: 3px solid var(--accent-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+            display: block;
             margin: 20px auto;
         }
 
         .hover-image:hover {
-            transform: scale(1.1); /* Zoom effect */
-            box-shadow: 0 0 20px rgba(96, 165, 250, 0.7); /* Glow effect */
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--accent-color);
         }
+
+        #settings-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+
+        .modal-content {
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
     </style>
 </head>
-<body>
+<body class="light-mode">
+
+<button id="settings-btn" class="flex items-center space-x-2 bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg shadow-xl transition duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.22a2 2 0 0 0-1.28 1.55l-.57 2.05a2 2 0 0 0-.11 1.76l.3 1.07a2 2 0 0 0-.25 1.58l-1.07.3a2 2 0 0 0-1.76-.11l-2.05-.57a2 2 0 0 0-1.55 1.28H2v.44a2 2 0 0 0 2 2h.22a2 2 0 0 0 1.55 1.28l2.05.57a2 2 0 0 0 1.76.11l1.07-.3a2 2 0 0 0 1.58.25l.3 1.07a2 2 0 0 0-.11 1.76l-.57 2.05a2 2 0 0 0 1.28 1.55v.22a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.22a2 2 0 0 0 1.28-1.55l.57-2.05a2 2 0 0 0 .11-1.76l-.3-1.07a2 2 0 0 0 .25-1.58l1.07-.3a2 2 0 0 0 1.76.11l2.05.57a2 2 0 0 0 1.55-1.28V12h-.44a2 2 0 0 0-2-2h-.22a2 2 0 0 0-1.55-1.28l-2.05-.57a2 2 0 0 0-1.76-.11l-1.07.3a2 2 0 0 0-1.58-.25l-.3-1.07a2 2 0 0 0 .11-1.76l.57-2.05a2 2 0 0 0-1.28-1.55V2h-.44zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path>
+    </svg>
+    <span>Settings</span>
+</button>
 
 <div class="content-card">
-    <h1> t1a01-proper-webpage-zach </h1>
+    <h1>t1a01-proper-webpage-zach</h1>
 
-    <p> This is my first attempt at making a proper webpage. I've upgraded the design with a modern dark theme and responsive layout. </p>
+    <p> This is my first attempt at making a proper webpage. I've upgraded the design with a modern dark theme and responsive layout. You can now adjust the theme using the "Settings" button in the top right. </p>
 
-    <a href="Trash.html"> 
-        <img src="pic1.jpg" class="hover-image"> 
-    </a> 
+    <a href="Trash.html">
+        <img src="https://placehold.co/150x150/60a5fa/ffffff?text=Image+Placeholder" class="hover-image" alt="Image Placeholder">
+    </a>
 
-    <a href="https://www.youtube.com/watch?v=pkFGo0Dgbzo"> Watch the Snake Video </a>
+    <a href="https://www.youtube.com/watch?v=pkFGo0Dgbzo" target="_blank"> Watch the Snake Video </a>
 </div>
 
+<div id="settings-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 transition-opacity duration-300">
+    <div class="modal-content p-8 rounded-xl shadow-2xl max-w-sm w-full m-4">
+        <div class="flex justify-between items-center mb-6 border-b border-gray-600 pb-3">
+            <h2 class="text-2xl font-bold">Theme Settings</h2>
+            <button id="close-modal-btn" class="text-gray-400 hover:text-white transition duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <div class="space-y-6">
+            <div>
+                <label class="block text-sm font-medium mb-2" for="theme-toggle">Interface Mode</label>
+                <button id="theme-toggle-btn" class="w-full py-2 px-4 rounded-lg font-semibold transition duration-300 shadow-md flex items-center justify-center space-x-2">
+                </button>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-2" for="accent-color-picker">Accent Color</label>
+                <div class="flex items-center space-x-4">
+                    <input type="color" id="accent-color-picker" value="#60a5fa" class="w-10 h-10 p-1 border border-gray-500 rounded-lg cursor-pointer">
+                    <span id="color-value-display" class="text-lg font-mono">#60A5FA</span>
+                </div>
+            </div>
+
+            <p class="text-xs text-gray-400 pt-4">Settings are saved for this session only.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const body = document.body;
+    const settingsModal = document.getElementById('settings-modal');
+    const settingsBtn = document.getElementById('settings-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const accentColorPicker = document.getElementById('accent-color-picker');
+    const colorValueDisplay = document.getElementById('color-value-display');
+
+    let isLightMode = true;
+
+    function updateThemeToggleButton() {
+        if (isLightMode) {
+            themeToggleBtn.textContent = 'Switch to Dark Mode';
+            themeToggleBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
+            themeToggleBtn.classList.add('bg-gray-600', 'hover:bg-gray-700', 'text-white');
+        } else {
+            themeToggleBtn.textContent = 'Switch to Light Mode';
+            themeToggleBtn.classList.remove('bg-gray-600', 'hover:bg-gray-700');
+            themeToggleBtn.classList.add('bg-yellow-500', 'hover:bg-yellow-600', 'text-gray-900');
+        }
+    }
+
+    function applyThemeMode() {
+        if (isLightMode) {
+            body.classList.add('light-mode');
+        } else {
+            body.classList.remove('light-mode');
+        }
+        updateThemeToggleButton();
+    }
+
+    function applyAccentColor(colorHex) {
+        document.documentElement.style.setProperty('--accent-color', colorHex);
+        colorValueDisplay.textContent = colorHex.toUpperCase();
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+        isLightMode = !isLightMode;
+        applyThemeMode();
+    });
+
+    accentColorPicker.addEventListener('input', (e) => {
+        applyAccentColor(e.target.value);
+    });
+
+    settingsBtn.addEventListener('click', () => {
+        settingsModal.classList.remove('hidden');
+        settingsModal.classList.add('flex');
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+        settingsModal.classList.add('hidden');
+        settingsModal.classList.remove('flex');
+    });
+
+    settingsModal.addEventListener('click', (e) => {
+        if (e.target === settingsModal) {
+            settingsModal.classList.add('hidden');
+            settingsModal.classList.remove('flex');
+        }
+    });
+
+    if (body.classList.contains('light-mode')) {
+        isLightMode = true;
+    } else {
+        isLightMode = false;
+    }
+    
+    const initialAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+    accentColorPicker.value = initialAccent;
+    colorValueDisplay.textContent = initialAccent.toUpperCase();
+    
+    updateThemeToggleButton();
+
+</script>
 </body>
 </html>
