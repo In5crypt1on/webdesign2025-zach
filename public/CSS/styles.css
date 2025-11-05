@@ -1,0 +1,81 @@
+
+body {
+    background-color: #0a6149; 
+    background-image: 
+        linear-gradient(#13be8e 50%, transparent 30%),
+        linear-gradient(90deg, #4aedbf 50%, transparent 30%);
+    background-size: 50px 50px;
+    background-position: 0 0, 30px 30px; 
+    
+    height: 100vh;
+    margin: 0;
+}
+
+@keyframes border-fun {
+  from {border-color: #329f80}
+  to {border-color: #be1343}
+}
+
+@keyframes border-fun2 {
+  0% {border-color: #117777}
+  50% {border-color: #FF6B6B}
+  100% {border-color: #D88C7E}
+}
+
+
+
+
+
+
+.card-glow {
+animation: border-fun2 9s alternate infinite;
+border:17px outset;
+}
+
+.card-glow1 {
+animation: border-fun 5s alternate infinite;
+border:9px outset;
+}
+
+
+code {
+border-radius: 20%;
+border: 1px solid black;
+background-color: #BBBBBB;
+     }
+h3 {
+border: 3px inset #C53A6D;
+background-color: #3AC592;
+display: inline;
+color: #C53A6D;
+transition: transform 0.5s ease;
+}
+
+h3:hover {
+transform: scale(1.2);
+}
+.left-item {
+  float: left;
+  margin-right: 500px;
+  border: 5px inset #969696;
+}
+.right-item {
+  float: right;
+  margin-left: 500px;
+  border: 5px inset #505050;
+position: relative; 
+  top: -100px;
+}
+
+.clearfix {
+  clear: both;
+}
+.side-by-side-container {
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+
+
+
+
