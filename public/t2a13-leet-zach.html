@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode Two Sum Solver (No CSS)</title>
+</head>
+
+
+
+
+
+
+<h1 align=center> t2a13-leet-zach </h1>
+
+<li> ask chatGPT for a beginner friendly javascript Leet code question and make an html javascript single file answer without any css.
+
+<li> Show Prompt here<br>
+Give me a beginner friendly JavaScript LeetCode Question and make the no-css html page to solve it 
+<li> Show The Leet question here<br>
+Problem: Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.<br>
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.<br>
+
+<li> Get the code working here<br><br>
+<h2>LeetCode 1: Two Sum (Beginner)</h2>
+
+    <div>
+        <h3>Problem Description:</h3>
+        <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.</p>
+        <p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
+        <p><strong>Example:</strong></p>
+        <p>Input: <code>nums = [2, 7, 11, 15]</code>, <code>target = 9</code></p>
+        <p>Output: <code>[0, 1]</code></p>
+    </div>
+
+    <hr>
+
+    <label for="nums-input">Input Array (Comma-separated numbers):</label>
+    <input type="text" id="nums-input" value="2, 7, 11, 15" placeholder="e.g., 2, 7, 11, 15">
+    <br><br>
+
+    <label for="target-input">Target Value (Number):</label>
+    <input type="number" id="target-input" value="9" placeholder="e.g., 9">
+    <br><br>
+
+    <button onclick="runSolution()">Run Solution</button>
+
+    <hr>
+
+    <h3>Result:</h3>
+    <div id="result-output" style="border: 1px solid black; padding: 10px; margin-top: 5px; background-color: #eee;">
+        <span id="output-text">Click 'Run Solution' to see the result.</span>
+    </div>
+
+<li> Withen PRE tags show your version of the leet answer without looking at the actual answer. <br>
+
+<pre>
+var twoSum = function(nums, target) {
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            if (nums[j] === target - nums[i]) {
+                return [i, j];
+            }
+        }
+    }
+    return [];
+};
+</pre>
+
+
+<script>
+        /**
+         * The Two Sum function using the O(n^2) nested loop approach.
+         * @param {number[]} nums
+         * @param {number} target
+         * @return {number[]}
+         */
+        function twoSum(nums, target) {
+            for (let i = 0; i < nums.length; i++) {
+                for (let j = i + 1; j < nums.length; j++) {
+                    if (nums[i] + nums[j] === target) {
+                        return [i, j];
+                    }
+                }
+            }
+            return [];
+        }
+
+        /**
+         * Handles running the solution and displaying output on the page.
+         */
+        function runSolution() {
+            // 1. Get and process inputs
+            const numsInput = document.getElementById('nums-input').value;
+            const targetInput = document.getElementById('target-input').value;
+
+            // Convert the comma-separated string into an array of numbers.
+            const numsArray = numsInput.split(',')
+                                       .map(s => s.trim())
+                                       .filter(s => s.length > 0)
+                                       .map(Number);
+
+            const targetValue = Number(targetInput);
+
+            // Basic input validation
+            if (numsArray.some(isNaN) || isNaN(targetValue) || numsArray.length < 2) {
+                document.getElementById('output-text').textContent = "Input Error: Please enter a valid comma-separated array of numbers and a target value.";
+                return;
+            }
+
+
+            // 2. Run the solution
+            const resultIndices = twoSum(numsArray, targetValue);
+
+            // 3. Display the output
+            const outputElement = document.getElementById('output-text');
+            const resultBox = document.getElementById('result-output');
+
+            if (resultIndices.length === 2) {
+                const i = resultIndices[0];
+                const j = resultIndices[1];
+                const num1 = numsArray[i];
+                const num2 = numsArray[j];
+
+                // Note: I left minimal inline styles on the result box for contrast,
+                // but you can remove the 'style' attribute entirely if required.
+                resultBox.style.backgroundColor = '#d0d0d0'; // A slight change for contrast
+
+                outputElement.innerHTML = `
+                    SUCCESS! The indices are **${i}** and **${j}**.
+                    (Check: ${num1} + ${num2} = ${targetValue})
+                `;
+
+            } else {
+                resultBox.style.backgroundColor = '#f0d0d0'; // Light red for error
+
+                outputElement.textContent = `FAILURE: No solution found for target ${targetValue}.`;
+            }
+        }
+    </script>
+
+</body>
+</html>
+
