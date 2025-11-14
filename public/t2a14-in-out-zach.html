@@ -1,0 +1,168 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body {
+background: radial-gradient(circle at 10% 20%, #FD3282 0%, #FFC70F 90%)
+}
+
+
+@keyframes border-fun {
+  from {border-color: #789F40}
+  to {border-color: #5429DA}
+}
+
+@keyframes border-fun2 {
+  0% {border-color: #FFC70F}
+  100% {border-color: #FD3282}
+}
+
+.card-glow {
+animation: border-fun2 9s alternate infinite;
+border:7px outset;
+}
+
+.card-glow1 {
+animation: border-fun 9s alternate infinite;
+border:9px outset;
+}
+
+
+code {
+border-radius: 20%;
+border: 1px solid black;
+background-color: #BBBBBB;
+     }
+h3 {
+border: 3px inset #C53A6D;
+background-color: #3AC592;
+display: inline;
+color: #C53A6D;
+transition: transform 0.5s ease;
+}
+
+h3:hover {
+transform: scale(1.2);
+}
+.left-item {
+  float: left;
+  margin-right: 500px;
+  border: 5px inset #969696;
+}
+.right-item {
+  float: right;
+  margin-left: 500px;
+  border: 5px inset #505050;
+position: relative; 
+  top: -100px;
+}
+
+.clearfix {
+  clear: both;
+}
+.side-by-side-container {
+    overflow-y: auto;
+    max-height: 80vh;
+}
+.control-panel-table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 170px; 
+}
+
+.control-panel-table td {
+  border: 3px solid white;
+  padding: 3px;
+  text-align: center;
+}
+
+.clickable-text:hover {
+  cursor: pointer;
+}
+</style>
+<body class="min-h-screen min-w-screen flex items-center justify-center p-4">
+
+
+
+
+<div align=center class="side-by-side-container bg-gray-900 w-[90vw] rounded-2xl p-12 transition-all duration-500 card-glow1 bg-opacity-60">
+
+<h2 align=center class="text-4xl font-extrabold text-white"> t2a14-in-out-zach </h2>
+	<div id="myDiv01" class="mx-auto bg-gray-800 p-3 rounded-2xl inline-block text-base bg-opacity-70 card-glow">
+<input id="myNum01" type=text value="zach"><br>
+	<span id="mySpan01" class="text-white font-extrabold text-4xl" style="position: relative; left: 0px; top: 0px; width: 50px; height: 30px;">
+...
+</span>
+<br>
+
+<input type=button class="text-white clickable-text" value="Zacharys stuff" onclick="{document.getElementById('mySpan01').innerHTML = document.getElementById('myNum01').value}"><br>
+
+<input type=button class="text-white clickable-text" value="Move" onclick="{document.getElementById('mySpan01').style.left = parseInt(document.getElementById('mySpan01').style.left) + 10 + 'px'}"><br>
+
+<table class="border-4 border-white control-panel-table">
+
+<tr>
+<td> <input type=button class="text-white clickable-text" value="↖" onclick="{document.getElementById('mySpan01').style.left = parseInt(document.getElementById('mySpan01').style.left) - 10 + 'px'; document.getElementById('mySpan01').style.top = parseInt(document.getElementById('mySpan01').style.top) - 10 + 'px';}"><br> </td>
+
+<td> <input type=button class="text-white clickable-text" value="W" onclick="{document.getElementById('mySpan01').style.top = parseInt(document.getElementById('mySpan01').style.top) - 10 + 'px'}"><br>
+</td>
+
+<td>
+<input type=button class="text-white clickable-text" value="↗" onclick="{document.getElementById('mySpan01').style.left = parseInt(document.getElementById('mySpan01').style.left) + 10 + 'px'; document.getElementById('mySpan01').style.top = parseInt(document.getElementById('mySpan01').style.top) - 10 + 'px';}"><br>
+</td>
+</tr>
+
+<tr>
+
+<td> 
+<input type=button class="text-white clickable-text" value="A" onclick="{document.getElementById('mySpan01').style.left = parseInt(document.getElementById('mySpan01').style.left) - 10 + 'px'}"> </td>
+
+<td> 
+<input type=button class="text-white clickable-text" value="Return" onclick="{document.getElementById('mySpan01').style.left = '0px'; document.getElementById('mySpan01').style.top = '0px';}">
+</td>
+
+
+
+<td> <input type=button class="text-white clickable-text" value="D" onclick="{document.getElementById('mySpan01').style.left = parseInt(document.getElementById('mySpan01').style.left) + 10 + 'px'}"> </td>
+</tr>
+
+<tr>
+
+<td> <input type=button class="text-white clickable-text" value="↙" onclick="{document.getElementById('mySpan01').style.left = parseInt(document.getElementById('mySpan01').style.left) - 10 + 'px'; document.getElementById('mySpan01').style.top = parseInt(document.getElementById('mySpan01').style.top) +  10 + 'px';}"> </td>
+
+<td> <p align=center> <input type=button class="clickable-text text-white" value="S" onclick="{document.getElementById('mySpan01').style.top = parseInt(document.getElementById('mySpan01').style.top) + 10 + 'px'}"> </p> </td>
+
+<td> <input type=button class="clickable-text text-white" value="↘" onclick="{document.getElementById('mySpan01').style.left = parseInt(document.getElementById('mySpan01').style.left) + 10 + 'px'; document.getElementById('mySpan01').style.top = parseInt(document.getElementById('mySpan01').style.top) + 10 + 'px';}"> </td>
+</tr>
+
+</table>
+</div><br>
+<div id="myDiv01" class="bg-gray-800 p-1 rounded-2xl inline-block text-base bg-opacity-70 card-glow">
+
+ <input type=button class="clickable-text text-white" value="Grow" onclick="{
+    let currentSize = parseInt(document.getElementById('mySpan02').style.fontSize);
+    document.getElementById('mySpan02').style.fontSize = (currentSize + 10) + 'px';
+}">
+/
+
+ <input type=button class="clickable-text text-white" value="Shrink" onclick="{
+    let currentSize = parseInt(document.getElementById('mySpan02').style.fontSize);
+    document.getElementById('mySpan02').style.fontSize = (currentSize - 10) + 'px';
+}">
+</div><br>
+
+<div align=center class="side-by-side-container bg-gray-900 rounded-2xl p-2 transition-all duration-500 card-glow1 bg-opacity-60">
+
+<span id="mySpan02" class="text-white font-extrabold text-4xl" style="position: relative; left: 0px; top: 0px; height: 30px; font-size: 36px;">
+
+Grow/shrink
+
+</span>
+</div>
+<br>
+
+
+
+
+
+
+
+
