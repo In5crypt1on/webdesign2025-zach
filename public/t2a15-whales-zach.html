@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whale Types Interactive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('https://giffiles.alphacoders.com/195/19516.gif');
+            background-size: cover;
+            background-repeat: repeat-x;
+        }
+
+        /* Combined container for the sliding mechanism */
+        .info-section.interactive-container {
+            display: flex;
+            max-width: 1900px;
+            transition: max-width 0.4s ease-out;
+            overflow: hidden;
+            /* Prevents vertical stretching when explanation-div is TALL */
+            align-items: flex-start;
+            margin: 0 auto; /* Center the interactive section */
+        }
+
+        /* Original, clickable div */
+        .trigger-div {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px; /* Reduced vertical padding */
+            cursor: pointer;
+            min-width: 350px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            
+            /* NEW: Set a defined minimum height to prevent stretching */
+            min-height: 80px; 
+            
+            /* Layout for the text content */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* 🖼️ Image Positioning */
+        .trigger-div img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 400%; /* Fills the min-height of the trigger-div */
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .trigger-div h3 {
+            margin: 0; /* Ensures text doesn't add extra vertical space */
+        }
+
+        /* Explanation Div (The Pop-out) */
+        .explanation-div {
+            background-color: #ecf0f1;
+            color: #333;
+            padding: 0;
+            width: 0;
+            /* Add height to the transition property */
+            transition: width 0.4s ease-out, padding 0.4s ease-out, height 0.4s ease-out;
+            overflow: hidden;
+            
+            /* NEW: Set initial height to zero when collapsed */
+            height: 0;
+        }
+
+        /* Active State: The div is "popped out" */
+        .info-section.interactive-container.active .explanation-div {
+            width: 650px;
+            padding: 20px;
+            /* NEW: Height to auto to fit the text content */
+            height: auto; 
+        }
+
+        /* Optional: Fade in the content */
+        .explanation-div p {
+            opacity: 0;
+            transition: opacity 0.2s ease 0.3s;
+        }
+
+        .info-section.interactive-container.active .explanation-div p {
+            opacity: 1;
+        }
+        .control-panel-table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 900px; 
+}
+
+.control-panel-table td {
+  border: 3px solid white;
+  padding: 3px;
+  text-align: center;
+}
+.control-panel-table th {
+  border: 3px solid white;
+  padding: 3px;
+  text-align: center;
+}
+
+.clickable-text:hover {
+  cursor: pointer;
+}
+    </style>
+</head>
+
+<body class="min-h-screen min-w-screen items-center justify-center p-6">
+
+    <h2 align=center class="font-extrabold text-4xl text-gray-800"> t2a15-whales-zach.html </h2><br>
+
+    <div align=center class="bg-gray-900 w-[90vw] rounded-2xl p-12 bg-opacity-60 text-white">
+        Make a webpage about whales... <br>
+    </div>
+
+    <br>
+    <div id="myDiv01" class="mx-auto bg-gray-800 p-3 rounded-2xl inline-block text-base bg-opacity-70 card-glow">
+        <h2 align=center class="font-extrabold text-4xl text-white"> Whale Types </h2>
+    </div>
+    
+    <div class="info-section interactive-container mx-auto">
+
+        <div class="trigger-div" id="infoTrigger">
+            <img src="https://www.worldatlas.com/r/w1200-q80/upload/ff/33/80/adobestock-573332061.jpeg" alt="Whale Illustration">
+            <h3>Click for Details</h3>
+        </div>
+
+        <div class="explanation-div" id="infoExplanation">
+            <p>Whales, magnificent marine mammals, are broadly divided into two major groups: Baleen Whales (Mysticeti) and Toothed Whales (Odontoceti). Baleen whales, such as the colossal Blue Whale and the Humpback Whale, are filter feeders, utilizing brush-like plates of baleen in their mouths to strain plankton and small fish from the water. In contrast, Toothed whales, which include dolphins, porpoises, Orcas (Killer Whales), and Sperm Whales, possess sharp teeth and are active hunters, using sophisticated echolocation to navigate and capture prey. This fundamental difference in feeding structure dictates their behavior, social patterns, and migratory routes, contributing to the incredible ecological and physical diversity observed across all whale species inhabiting the world's oceans</p>
+        </div>
+    </div>
+
+      <div align=center class="bg-gray-900 w-[90vw] rounded-2xl p-12 bg-opacity-60 text-white">
+       <table class="border-4 border-white control-panel-table">
+<tr>
+<th> Baleen Whales </th>
+<th> Toothed Whales </th>
+</tr>
+<tr>
+<td> <img src="https://jooinn.com/images/humpback-whale-16.jpg"></td>
+<td><img src="https://www.cdhp.org/wp-content/uploads/2023/09/Anatomy-of-Toothed-Whales.jpg"></td>
+</tr>
+<tr>
+<td> <u><a href="https://animalfact.com/toothed-whales/"> Animalfact.com </a></u></td>
+<td><u><a href="https://us.whales.org/whales-dolphins/what-is-baleen/"> whales.org </a></u></td>
+</tr>
+       </table>
+       
+<br>
+    </div>
+          <div align=center class="bg-gray-900 w-[90vw] rounded-2xl p-12 bg-opacity-60 text-white">
+<input type=button value="click me for whales" onclick="const imageElement = document.getElementById('Whale01');
+  if (imageElement.src.includes('https://cff2.earth.com/uploads/2023/12/11161933/Beluga-whales-scaled.jpg')) {
+    imageElement.src = 'https://i.pinimg.com/originals/de/04/a9/de04a9af25e3172472c4b503882ed471.jpg';
+  } else if (imageElement.src.includes('https://i.pinimg.com/originals/de/04/a9/de04a9af25e3172472c4b503882ed471.jpg')) {
+    imageElement.src = 'https://th.bing.com/th/id/R.c46cdddb9622f252413594b4032bd0c6?rik=MjI1gYPave5TNg&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fJvygHQh.jpg&ehk=BPVPl%2bTj7%2fOS9qsTnNhVSAhnZEiQEFFnrqtLO1VaYwk%3d&risl=&pid=ImgRaw&r=0';
+  } else {
+    imageElement.src = 'https://cff2.earth.com/uploads/2023/12/11161933/Beluga-whales-scaled.jpg';
+  }
+" class="clickable-text">
+<img src="https://cff2.earth.com/uploads/2023/12/11161933/Beluga-whales-scaled.jpg" id="Whale01">
+Adults are distinctive, pure white with a flexible, bulbous forehead called a "melon." Calves are born dark gray.
+Arctic and sub-Arctic waters, including Alaska, Canada, Russia, and Greenland. They frequently use shallow coastal areas, estuaries, and river mouths, and are highly adapted to swimming among ice floes.
+Adults are typically 11 to 15 feet (3.4–4.6 meters) long and can weigh up to 3,500 pounds (1,500 kg). Males are generally larger than females.
+They are opportunistic feeders, eating a varied diet of fish (like salmon, cod, and herring), as well as invertebrates such as squid, octopus, shrimp, and crabs.
+They can live for 30 to 50 years in the wild
+          </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const triggerDiv = document.getElementById('infoTrigger');
+            const container = document.querySelector('.info-section.interactive-container');
+
+            triggerDiv.addEventListener('click', function() {
+                container.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
