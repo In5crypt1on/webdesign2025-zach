@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max-Viewport Glowing Rounded Card</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+
+body {
+background: radial-gradient(circle at 50% 50%, #FF0BAC 0%, #FDBCFD 90%)
+}
+
+
+@keyframes rainbow-glow {
+    0%   {
+        box-shadow: 
+            0 0 70px #a31818e6, 
+            0 0 70px 10px #ff000080, 
+            0 20px 40px #00000099;
+    }
+    16%  {
+        box-shadow: 
+            0 0 70px #990036e6, 
+            0 0 70px 10px #9b003780, 
+            0 20px 40px #00000099;
+    }
+    33%  {
+        box-shadow: 
+            0 0 70px #37009be6, 
+            0 0 70px 10px #37009b80, 
+            0 20px 40px #00000099;
+    }
+    50%  {
+        box-shadow: 
+            0 0 30px #0000ffe6, 
+            0 0 70px 10px #0000ff80, 
+            0 20px 40px #00000099;
+    }
+    66%  {
+        box-shadow: 
+            0 0 70px #37009be6, 
+            0 0 70px 10px #37009b80, 
+            0 20px 40px #00000099;
+    }
+    83% {
+        box-shadow: 
+            0 0 70px #9b0037e6, 
+            0 0 70px 10px #9b003780, 
+            0 20px 40px #00000099;
+    }
+    100% {
+        box-shadow: 
+            0 0 70px #ff0000e6, 
+            0 0 70px 10px #31171780, 
+            0 20px 40px #00000099;
+    }
+}
+
+@keyframes border-fun {
+  from {border-color: #490034;}
+  to {border-color: #F6B405;}
+}
+
+@keyframes border-fun2 {
+  from {border-color: #8b367375;}
+  to {border-color: #f6b60575;}
+}
+
+
+
+
+
+
+
+.card-glow {
+animation: rainbow-glow 4s alternate infinite,
+border-fun 3s alternate infinite;
+border:17px outset;
+}
+
+code {
+border-radius: 20%;
+border: 1px solid black;
+background-color: #BBBBBB;
+     }
+h3 {
+border-radius: 12%;
+border: 1px solid red;
+background-color: #550050;
+display: inline;
+color: #FF00FF;
+ box-shadow:
+0 0 30px rgba(75, 0, 130, 0.3), 
+0 0 90px 17px rgba(75, 0, 130, 0.5), 
+0 20px 40px rgba(0, 0, 0, 0.3);
+transition: transform 0.5s ease;
+}
+
+h3:hover {
+transform: scale(1.2);
+}
+
+.twix {
+box-shadow: 0 0 30px 1px #A0A0A0;
+border:5px inset #810981;
+animation: border-fun2 3s alternate infinite;
+}
+.message-box {
+z-index: 1000;
+transition: opacity 0.3s ease;
+}
+.lift-div {
+    width: 300px; 
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.is-raised {
+    transform: translateX(20px); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body class="bg-gray-200 min-h-screen min-w-screen flex items-center justify-center p-4" style="color: #F6B405;">
+
+
+
+<div class="bg-gray-700 w-[90vw] rounded-2xl  p-12 transition-all duration-500 card-glow divBorder opacity-70 hover:opacity-100">
+<h1 align=center class="text-4xl font-extrabold mb-3"> t2a16-backend-research-zach.html</h1>
+<p class="text-lg mb-4">Everything we have done with JavaScript web page programming is called frontend coding. Backend coding is much more powerful but more confusing. Your job is to find the easiest beackend cloud platform which is still powerful and free.</p><br><br>
+List the backends you have reaserched here.<br><br>
+
+<div class="twix p-4 mb-4">
+1. Firebase<br>
+2. Supabase<br>
+3. Heroku<br>
+4. AWS Amplify<br>
+</div>
+
+List the backends you have tried here.<br><br>
+
+<div class="twix p-4 mb-4">
+1. Firebase - tried, couldn't figure it out, was trying for a while<br>
+2. Supabase - tried, was able to connect and do some basic stuff<br>
+</div>
+
+
+
+Conclusion here.<br><br><div class="twix p-4 mb-4">
+I think Supabase is the easiest backend to use for web development. It has a simple interface and good documentation. Firebase was more confusing and I couldn't get it to work properly. Heroku and AWS Amplify seem powerful but I didn't try them yet. Overall, Supabase seems like the best option for beginners who want to add backend functionality to their web projects.
+</div>
+
+</div>
+</body>
+</html>
