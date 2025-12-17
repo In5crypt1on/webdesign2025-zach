@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* A subtle background pattern can add some texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 20%, rgba(128, 128, 128, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-gray-500 text-gray-200 min-h-screen flex flex-col items-center justify-center p-4 sm:p-8">
+    <div class="w-full max-w-4xl text-center">
+        
+        <!-- Header Section -->
+        <header class="mb-10">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">Indie Game Website</h1>
+            <p class="text-lg text-gray-800">Creations by Zach</p>
+        </header>
+
+        <!-- Grid for the GIF cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <a href="inscryption.html">
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg hover:text-black hover:bg-red-800 hover:shadow-gray-900 hover:border-gray-800 transition-all duration-300 flex flex-col items-center">
+                 <h2 class="text-3xl font-semibold"> Inscryption </h2>
+            </div>
+        </a>
+
+            <!-- Card 1: Light GIF -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg hover:text-gray-400 hover:bg-blue-800 hover:shadow-blue-500 hover:border-blue-500 transition-all duration-300 flex flex-col items-center">
+                <h2 class="text-3xl font-semibold"> Hollow Knight </h2>
+            </div>
+
+            <!-- Card 2: Card GIF -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg hover:text-black hover:bg-orange-200 hover:shadow-gray-900 hover:border-gray-800 transition-all duration-300 flex flex-col items-center">
+                 <h2 class="text-3xl font-semibold"> The Binding of Isaac </h2>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

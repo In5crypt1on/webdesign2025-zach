@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscryption</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* A subtle background pattern can add some texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 20%, rgba(128, 128, 128, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-gray-500 text-gray-200 min-h-screen flex flex-col items-center justify-center p-4 sm:p-8">
+    <div class="w-full max-w-4xl text-center">
+        
+        <!-- Header Section -->
+        <header class="mb-10">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-2"> Sigils </h1>
+            <p class="text-lg text-gray-800">What type of cards are you looking at?</p>
+        </header>
+
+        <!-- Grid for the GIF cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg hover:text-black hover:bg-red-800 hover:shadow-gray-900 hover:border-gray-800 transition-all duration-300 flex flex-col items-center">
+                 <h2 class="text-3xl font-semibold"> Beast </h2>
+            </div>
+            <a href="inscryption-Dead-sigils.html"></a>
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg hover:bg-purple-800 hover:shadow-gray-900 hover:border-gray-800 transition-all duration-300 flex flex-col items-center">
+                 <h2 class="text-3xl font-semibold"> Dead </h2>
+            </div>
+        </a>
+
+       <a href="inscryption-tech-sigils.html">
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg hover:bg-[#00eaff] hover:text-black hover:shadow-gray-900 hover:border-gray-800 transition-all duration-300 flex flex-col items-center">
+                 <h2 class="text-3xl font-semibold"> Technology </h2>
+            </div>
+            </a>
+             <a href="inscryption-magick-sigils.html">
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg hover:text-black hover:bg-green-800 hover:shadow-orange-900 hover:border-gray-800 transition-all duration-300 flex flex-col items-center">
+                <h2 class="text-3xl font-semibold"> Magicks </h2>
+            </div>
+            </a>
+
+
+        </div>
+    </div>
+</body>
+</html>

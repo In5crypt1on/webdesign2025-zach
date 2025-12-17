@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technology Sigils</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for smooth transitions and techy fonts */
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap');
+        :root {
+            --header-font: 'VT323', monospace;
+            --body-font: 'IBM Plex Mono', monospace;
+        }
+        .card-transition {
+            transition: all 0.3s ease-in-out;
+        }
+        body {
+            font-family: var(--body-font);
+            position: relative;
+        }
+        /* CRT Scanline Effect */
+        body::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+        h1, h2 {
+            font-family: var(--header-font);
+        }
+
+        /* --- New Flip Animation Styles --- */
+        .card-container {
+            perspective: 1000px;
+            min-height: 220px; /* Adjust based on your card front's typical height */
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s;
+            transform-style: preserve-3d;
+        }
+        .card-container.is-flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* --- New Intro Flicker Animation --- */
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 5px #00EAFF, 0 0 10px #00EAFF, 0 0 20px #00EAFF, 0 0 40px #00EAFF, 0 0 70px #00EAFF;
+            }
+            20%, 24%, 55% {
+                opacity: 0.5;
+                text-shadow: none;
+            }
+        }
+        .intro-text-flicker {
+            animation: flicker 1.5s linear;
+        }
+        .fade-out {
+            transition: opacity 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-700 min-h-screen p-4 sm:p-8">
+
+    <!-- Intro Overlay -->
+    <div id="intro-overlay" class="fixed inset-0 bg-gray-900 flex items-center justify-center" style="z-index: 9999;">
+        <h1 id="intro-text" class="text-6xl intro-text-flicker" style="color: #00EAFF; font-family: var(--header-font);">
+            &gt; BOOTING...
+        </h1>
+    </div>
+
+
+    <!-- Home Button -->
+    <a href="t2a-website-indie-zach.html" 
+       class="fixed top-6 left-6 bg-gray-800 text-indigo-400 px-4 py-2 rounded-md shadow-lg hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300 border-2 border-indigo-500/50 hover:border-indigo-400"
+       style="z-index: 10;"
+       title="Back to Home"
+    >
+        <span class="font-semibold text-lg" style="font-family: var(--header-font);">HOME</span>
+    </a>
+
+
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-6xl" style="color: #00EAFF; text-shadow: 0 0 5px #00EAFF, 0 0 10px #00EAFF, 0 0 20px #00EAFF;">Technology Sigils</h1>
+            <p class="mt-4 text-lg text-gray-400">These mainly appear in Act 3, but may also appear in Act 2</p>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="mb-8 max-w-lg mx-auto">
+            <label for="search-bar" class="sr-only">Search Sigils</label>
+            <input 
+                type="text" 
+                id="search-bar" 
+                placeholder="Search for a sigil by name..."
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+        </div>
+
+        <!-- Card Grid Container -->
+        <!-- Responsive grid: 2 columns on mobile, 3 on medium, 5 on large, 7 on extra-large -->
+        <div id="card-grid" class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
+            
+            <!-- CARD 1: Start Editing Here -->
+            <div id="card-1" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <!-- Card Front -->
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img 
+                            src="Tech-Photos\Ability_Sprinter.png" 
+                            alt="Sprinter Sigil" 
+                            class="w-full h-34 object-cover"
+                            onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'"
+                        >
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Sprinter</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 1</p>
+                        </div>
+                    </div>
+                    <!-- Card Back -->
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Sprinter</h2>
+                            <p class="text-xs text-gray-300 mt-2">
+                                After a card with this sigil attacks, it moves in the direction of the arrow, which changes direction when it runs into another creature on its side.
+                            </p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 1: End -->
+
+            <!-- CARD 2 -->
+            <div id="card-2" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_TouchOfDeath.png" alt="Touch of Death Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Touch of Death</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 2</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Touch of Death</h2>
+                            <p class="text-xs text-gray-300 mt-2">When a card with this sigil attacks, the opposing <b>card</b> is killed, no matter the health.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 2: End -->
+            
+            <!-- CARD 3 -->
+            <div id="card-3" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Burrower.png" alt="Burrower Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Burrower</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 3</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Burrower</h2>
+                            <p class="text-xs text-gray-300 mt-2">When a opposing card attacks a empty space, this card will move to that space.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 3: End -->
+
+            <!-- CARD 4 -->
+            <div id="card-4" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Unkillable.png" alt="Unkillable Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Unkillable</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 4</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Unkillable</h2>
+                            <p class="text-xs text-gray-300 mt-2">When a card bearing this sigil perishes, a copy of it is created in your hand.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 5 -->
+            <div id="card-5" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Sentry.webp" alt="Sentry Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Sentry</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 5</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Sentry</h2>
+                            <p class="text-xs text-gray-300 mt-2">When an opposing card is played, this card attacks it.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 6 -->
+            <div id="card-6" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Airborne.webp" alt="Airborne Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Airborne</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 6</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Airborne</h2>
+                            <p class="text-xs text-gray-300 mt-2">A card bearing this sigil will attack the opponent directly, as if the opposing space is empty.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 7 -->
+            <div id="card-7" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Amorphous.webp" alt="Amorphous Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Amorphous</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 7</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Amorphous</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is played, it takes on the sigils of a random card in your hand.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 8 -->
+            <div id="card-8" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Annoying.webp" alt="Annoying Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Annoying</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 8</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Annoying</h2>
+                            <p class="text-xs text-gray-300 mt-2">At the start of your turn, this card will move in the direction of the arrow.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 9 -->
+            <div id="card-9" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_AttackConduit.webp" alt="Attack Conduit Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Attack Conduit</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 9</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Attack Conduit</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is on the board, other friendly cards in the same circuit gain +1 Power.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 10 -->
+            <div id="card-10" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_BatteryBearer.webp" alt="Battery Bearer Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Battery Bearer</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 10</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Battery Bearer</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is played, you gain 1 Energy cell.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 11 -->
+            <div id="card-11" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Bifurcatedstrike.webp" alt="Bifurcated Strike Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Bifurcated Strike</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 11</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Bifurcated Strike</h2>
+                            <p class="text-xs text-gray-300 mt-2">A card bearing this sigil will strike each opposing space adjacent to the space across from it.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 12 -->
+            <div id="card-12" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_BombLatch.webp" alt="Bomb Latch Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Bomb Latch</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 12</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Bomb Latch</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card perishes, the card that killed it gains the Detonator sigil.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 13 -->
+            <div id="card-13" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_GreenMox.webp" alt="Green Mox Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Green Mox</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 13</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Green Mox</h2>
+                            <p class="text-xs text-gray-300 mt-2">This card provides one Green Gem if it is on the board.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 14 -->
+            <div id="card-14" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_OrangeMox.webp" alt="Orange Mox Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Orange Mox</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 14</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Orange Mox</h2>
+                            <p class="text-xs text-gray-300 mt-2">This card provides one Orange Gem if it is on the board.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 15 -->
+            <div id="card-15" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_BlueMox.webp" alt="Blue Mox Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Blue Mox</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 15</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Blue Mox</h2>
+                            <p class="text-xs text-gray-300 mt-2">This card provides one Blue Gem if it is on the board.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 16 -->
+            <div id="card-16" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Brittle.webp" alt="Brittle Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Brittle</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 16</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Brittle</h2>
+                            <p class="text-xs text-gray-300 mt-2">A card bearing this sigil perishes after striking once.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 17 -->
+            <div id="card-17" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_BrittleLatch.webp" alt="Brittle Latch Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Brittle Latch</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 17</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Brittle Latch</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card perishes, the card that killed it gains the Brittle sigil.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 18 -->
+            <div id="card-18" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_BuffWhenPowered.webp" alt="Buff When Powered Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Buff When Powered</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 18</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Buff When Powered</h2>
+                            <p class="text-xs text-gray-300 mt-2">While this card is part of a completed circuit, it gains +2 Power.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 19 -->
+            <div id="card-19" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Clinger.webp" alt="Clinger Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Clinger</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 19</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Clinger</h2>
+                            <p class="text-xs text-gray-300 mt-2">When an opposing card is played, this card will move to the space opposing it.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 20 -->
+            <div id="card-20" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_DeadByte.webp" alt="Dead Byte Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Dead Byte</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 20</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Dead Byte</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card perishes, a 0/1 file is created in your hand.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 21 -->
+            <div id="card-21" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Detonator.webp" alt="Detonator Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Detonator</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 21</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Detonator</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card perishes, it deals 10 damage to the opposing card and any adjacent cards.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 22 -->
+            <div id="card-22" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_GemDetonator.webp" alt="Gem Detonator Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Gem Detonator</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 22</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Gem Detonator</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card perishes, all cards on the board with a Gem sigil are destroyed.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 23 -->
+            <div id="card-23" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_GemGuardian.webp" alt="Gem Guardian Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Gem Guardian</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 23</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Gem Guardian</h2>
+                            <p class="text-xs text-gray-300 mt-2">When an opposing card attacks a card with a Gem sigil, this card moves to block the attack.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 24 -->
+            <div id="card-24" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_GemSpawnConduit.webp" alt="Gem Spawn Conduit Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Gem Spawn Conduit</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 24</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Gem Spawn Conduit</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is part of a completed circuit, a card with a Gem sigil is created in your hand.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 25 -->
+            <div id="card-25" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_GiftBearer.webp" alt="Gift Bearer Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Gift Bearer</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 25</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Gift Bearer</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card perishes, a random card is created in your hand.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 26 -->
+            <div id="card-26" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_GiftWhenPowered.webp" alt="Gift When Powered Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Gift When Powered</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 26</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Gift When Powered</h2>
+                            <p class="text-xs text-gray-300 mt-2">While this card is part of a completed circuit, a random card is created in your hand at the end of your turn.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 27 -->
+            <div id="card-27" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Guardian.webp" alt="Guardian Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Guardian</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 27</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Guardian</h2>
+                            <p class="text-xs text-gray-300 mt-2">When an opposing card is played, this card will move to the space opposing it.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 28 -->
+            <div id="card-28" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Hefty.webp" alt="Hefty Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Hefty</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 28</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Hefty</h2>
+                            <p class="text-xs text-gray-300 mt-2">When an opposing card moves, this card moves to block it.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 29 -->
+            <div id="card-29" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_HostageFile.webp" alt="Hostage File Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Hostage File</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 29</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Hostage File</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card perishes, a copy of the card that killed it is created in your hand.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 30 -->
+            <div id="card-30" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_MightyLeap.webp" alt="Mighty Leap Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Mighty Leap</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 30</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Mighty Leap</h2>
+                            <p class="text-xs text-gray-300 mt-2">This card can block a card with the Airborne sigil.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 31 -->
+            <div id="card-31" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Nano_Armor.webp" alt="Nano Armor Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Nano Armor</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 31</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Nano Armor</h2>
+                            <p class="text-xs text-gray-300 mt-2">This card will block one instance of damage before perishing.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 32 -->
+            <div id="card-32" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_NullConduit.webp" alt="Null Conduit Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Null Conduit</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 32</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Null Conduit</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is part of a completed circuit, it nullifies the sigils of all other friendly cards in the circuit.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 33 -->
+            <div id="card-33" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Overclocked.webp" alt="Overclocked Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Overclocked</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 33</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Overclocked</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is sacrificed, it perishes, but provides 3 bones instead of 1.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 34 -->
+            <div id="card-34" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Repulsive.webp" alt="Repulsive Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Repulsive</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 34</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Repulsive</h2>
+                            <p class="text-xs text-gray-300 mt-2">This card cannot be sacrificed.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 35 -->
+            <div id="card-35" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_TrifurcatedWhenPowered.webp" alt="Trifurcated When Powered Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Trifurcated When Powered</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 35</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Trifurcated When Powered</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is part of a completed circuit, it gains the Trifurcated sigil.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 36 -->
+            <div id="card-36" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_SharpQuills.webp" alt="Sharp Quills Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Sharp Quills</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 36</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Sharp Quills</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is struck, the attacker takes 1 damage.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 37 -->
+            <div id="card-37" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_ShieldLatch.webp" alt="Shield Latch Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Shield Latch</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 37</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Shield Latch</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card perishes, the card that killed it gains the Nano Armor sigil.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 38 -->
+            <div id="card-38" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Sniper.webp" alt="Sniper Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Sniper</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 38</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Sniper</h2>
+                            <p class="text-xs text-gray-300 mt-2">You may choose the target of this card's attack.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 39 -->
+            <div id="card-39" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Stinky.webp" alt="Stinky Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Stinky</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 39</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Stinky</h2>
+                            <p class="text-xs text-gray-300 mt-2">The card opposing this one has its Power reduced by 1.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 40 -->
+            <div id="card-40" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Swapper.webp" alt="Swapper Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Swapper</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 40</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Swapper</h2>
+                            <p class="text-xs text-gray-300 mt-2">At the end of your turn, this card swaps places with the card opposing it.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 41 -->
+            <div id="card-41" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_Transformer.webp" alt="Transformer Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Transformer</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 41</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Transformer</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card perishes, it transforms into a different card.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 42 -->
+            <div id="card-42" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_TrifurcatedStrike.webp" alt="Trifurcated Strike Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Trifurcated Strike</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 42</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Trifurcated Strike</h2>
+                            <p class="text-xs text-gray-300 mt-2">A card bearing this sigil will strike the opposing space, as well as the spaces to the left and right of it.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 43 -->
+            <div id="card-43" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="Tech-Photos\Ability_VesselPrinter.webp" alt="Vessel Printer Sigil" class="w-full h-34 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #00EAFF;">Vessel Printer</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 43</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #00EAFF;">Vessel Printer</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is played, create a copy of a Vessel in your hand.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 43: End -->
+
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button 
+        id="back-to-top-btn"
+        class="hidden fixed bottom-6 right-6 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-opacity duration-300"
+        style="z-index: 10;"
+        title="Go to top"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
+    <script>
+        // Function to handle the click event and toggle visibility
+        function toggleDetails(cardContainer) {
+            // Close any other flipped cards
+            document.querySelectorAll('.card-container.is-flipped').forEach(flippedCard => {
+                if (flippedCard !== cardContainer) {
+                    flippedCard.classList.remove('is-flipped');
+                }
+            });
+            // Toggle the flip state of the clicked card
+            cardContainer.classList.toggle('is-flipped');
+        }
+
+        // --- Intro Animation Logic ---
+        window.addEventListener('load', () => {
+            const overlay = document.getElementById('intro-overlay');
+            // Wait for the flicker animation to play out (1.5s) plus a small delay
+            setTimeout(() => {
+                overlay.classList.add('fade-out');
+                // Remove the overlay from the DOM after the fade-out transition
+                setTimeout(() => overlay.remove(), 500);
+            }, 1800);
+        });
+
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchBar = document.getElementById('search-bar');
+            const cards = document.querySelectorAll('.card-container');
+
+            searchBar.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+
+                cards.forEach(card => {
+                    const titleElement = card.querySelector('h2');
+                    const descriptionElement = card.querySelector('.card-back p:first-of-type');
+                    if (titleElement && descriptionElement) {
+                        const title = titleElement.textContent.toLowerCase();
+                        const description = descriptionElement.textContent.toLowerCase();
+                        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+
+            // Back to Top button functionality
+            const backToTopBtn = document.getElementById('back-to-top-btn');
+
+            window.addEventListener('scroll', () => {
+                // Show button after scrolling down 300px
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('hidden');
+                } else {
+                    backToTopBtn.classList.add('hidden');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

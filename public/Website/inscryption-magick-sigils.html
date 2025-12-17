@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magick Sigils</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for a digital, magical feel */
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap');
+        :root {
+            --header-font: 'VT323', monospace;
+            --body-font: 'IBM Plex Mono', monospace;
+        }
+        .card-transition {
+            transition: all 0.3s ease-in-out;
+        }
+        body {
+            font-family: var(--body-font);
+            position: relative;
+        }
+        /* Digital Scanline Effect with Magical Colors */
+        body::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(79, 70, 229, 0.05), rgba(5, 150, 105, 0.02), rgba(249, 115, 22, 0.05));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+        h1, h2 {
+            font-family: var(--header-font);
+        }
+
+        /* --- New Flip Animation Styles --- */
+        .card-container {
+            perspective: 1000px;
+            min-height: 220px; /* Adjust based on your card front's typical height */
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s;
+            transform-style: preserve-3d;
+        }
+        .card-container.is-flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* --- Intro Animation Styles --- */
+        .fade-out {
+            transition: opacity 0.5s ease-out;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-700 min-h-screen p-4 sm:p-8">
+
+    <!-- Intro Overlay -->
+    <div id="intro-overlay" class="fixed inset-0" style="z-index: 9999; background-color: #f5f5dc; cursor: pointer;">
+        <canvas id="paint-canvas" style="width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges;"></canvas>
+    </div>
+
+
+    <!-- Home Button -->
+    <a href="t2a-website-indie-zach.html"
+       class="fixed top-6 left-6 bg-gray-800 text-indigo-400 px-4 py-2 rounded-md shadow-lg hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300 border-2 border-indigo-500/50 hover:border-indigo-400"
+       style="z-index: 10;"
+       title="Back to Home"
+    >
+        <span class="font-semibold text-2xl" style="font-family: var(--header-font);">HOME</span>
+    </a>
+
+
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-6xl" style="color: #818cf8; text-shadow: 0 0 5px #4f46e5, 0 0 10px #4f46e5, 0 0 20px #4f46e5;">Magick Sigils</h1>
+            <p class="mt-4 text-lg text-gray-300">These sigils of arcane power appear mainly in Act 2.</p>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="mb-8 max-w-lg mx-auto">
+            <label for="search-bar" class="sr-only">Search Sigils</label>
+            <input 
+                type="text" 
+                id="search-bar" 
+                placeholder="Search for a sigil by name..."
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+        </div>
+
+        <!-- Card Grid Container -->
+        <!-- Responsive grid: 2 columns on mobile, 3 on medium, 5 on large, 7 on extra-large -->
+        <div id="card-grid" class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
+            
+            <!-- CARD 1: Start Editing Here -->
+            <div id="card-1" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <!-- Card Front -->
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-blue-400">
+                        <img 
+                            src="M-Photos\Pixelability_bluemox.webp" 
+                            alt="Blue Mox Sigil" 
+                            class="w-full h-33 object-cover"
+                            onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'"
+                        >
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #60a5fa;">Blue Mox</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 1</p>
+                        </div>
+                    </div>
+                    <!-- Card Back -->
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-blue-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #60a5fa;">Blue Mox</h2>
+                            <p class="text-xs text-gray-300 mt-2">This card provides one Blue Gem if it is on the board.</p>
+                            <p class="text-xs text-blue-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 1: End -->
+
+            <!-- CARD 2 -->
+            <div id="card-2" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-green-400">
+                        <img src="M-Photos\Pixelability_greenmox.webp" alt="Green Mox Sigil" class="w-full h-33 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #4ade80;">Green Mox</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 2</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-green-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #4ade80;">Green Mox</h2>
+                            <p class="text-xs text-gray-300 mt-2">This card provides one Green Gem if it is on the board.</p>
+                            <p class="text-xs text-green-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 2: End -->
+            
+            <!-- CARD 3 -->
+            <div id="card-3" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-orange-400">
+                        <img src="M-Photos\Pixelability_orangemox.webp" alt="Orange Mox Sigil" class="w-full h-33 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #fb923c;">Orange Mox</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 3</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-orange-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #fb923c;">Orange Mox</h2>
+                            <p class="text-xs text-gray-300 mt-2">This card provides one Orange Gem if it is on the board.</p>
+                            <p class="text-xs text-orange-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 3: End -->
+
+            <!-- CARD 4 -->
+            <div id="card-4" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="M-Photos\Pixelability_gemanimator.webp" alt="Gem Animator Sigil" class="w-full h-33 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #818cf8;">Gem Animator</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 4</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #818cf8;">Gem Animator</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is on the board, all friendly mox cards gain +1 Power.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 5 -->
+            <div id="card-5" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="M-Photos\Pixelability_gemdependant.webp" alt="Gem Dependant Sigil" class="w-full h-33 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #818cf8;">Gem Dependant</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 5</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #818cf8;">Gem Dependant</h2>
+                            <p class="text-xs text-gray-300 mt-2">A card with this sigil will die if there is not a mox card on the board</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 6 -->
+            <div id="card-6" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-indigo-400">
+                        <img src="M-Photos\Pixelability_greatmox.webp" alt="Great Mox Sigil" class="w-full h-33 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #818cf8;">Great Mox</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 6</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-indigo-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #818cf8;">Great Mox</h2>
+                            <p class="text-xs text-gray-300 mt-2">This card provides one of each color of Gem if it is on the board.</p>
+                            <p class="text-xs text-indigo-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 7 -->
+            <div id="card-7" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-green-400">
+                        <img src="M-Photos\Pixelability_handy.webp" alt="Handy Sigil" class="w-full h-33 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #4ade80;">Handy</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 7</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-green-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #4ade80;">Handy</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is played, discard your hand and draw 4 more cards</p>
+                            <p class="text-xs text-green-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 8 -->
+            <div id="card-8" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-orange-400">
+                        <img src="M-Photos\Pixelability_mentalgemnastics.webp" alt="Mental Gemnastics Sigil" class="w-full h-33 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #fb923c;">Mental Gemnastics</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 8</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-orange-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #fb923c;">Mental Gemnastics</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card is played, draw cards equal to the amount of mox cards on your side</p>
+                            <p class="text-xs text-orange-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 9 -->
+            <div id="card-9" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-orange-400">
+                        <img src="M-Photos\Pixelability_rubyheart.webp" alt="Ruby Heart Sigil" class="w-full h-33 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #fb923c;">Ruby Heart</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 9</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-orange-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #fb923c;">Ruby Heart</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this card perishes, a orange mox is played in its place.</p>
+                            <p class="text-xs text-orange-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 10 -->
+            <div id="card-10" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-green-400">
+                        <img src="M-Photos\Pixelability_stimulate.webp" alt="Stimulate Sigil" class="w-full h-33 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #4ade80;">Stimulate</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 10</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-green-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #4ade80;">Stimulate</h2>
+                            <p class="text-xs text-gray-300 mt-2">When this ability is activated, this card gains 1 power and 2 health. cost 3 energy</p>
+                            <p class="text-xs text-green-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 11 -->
+            <div id="card-11" class="card-container" onclick="toggleDetails(this)">
+                <div class="card-inner">
+                    <div class="card-front card-transition bg-gray-900 shadow-lg hover:shadow-xl rounded-md overflow-hidden cursor-pointer border-2 border-gray-800 hover:border-green-400">
+                        <img src="M-Photos\Pixelability_truescholar.webp" alt="True Scholar Sigil" class="w-full h-33 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/6366f1/ffffff?text=Image+Missing'">
+                        <div class="p-3">
+                            <h2 class="text-xl font-semibold truncate" style="color: #4ade80;">True Scholar</h2>
+                            <p class="text-xs text-gray-500 mt-1">ID: 11</p>
+                        </div>
+                    </div>
+                    <div class="card-back card-transition bg-gray-900 shadow-lg rounded-md overflow-hidden cursor-pointer border-2 border-green-500 p-3 flex flex-col justify-center">
+                        <div>
+                            <h2 class="text-xl font-semibold" style="color: #4ade80;">True Scholar</h2>
+                            <p class="text-xs text-gray-300 mt-2">if you have a blue mox when you actuvate this ability, it perishes and you draw 3 more cards</p>
+                            <p class="text-xs text-green-500 mt-4 font-medium">Click again to hide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    <!-- Back to Top Button -->
+    <button 
+        id="back-to-top-btn"
+        class="hidden fixed bottom-6 right-6 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-opacity duration-300"
+        style="z-index: 10;"
+        title="Go to top"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
+    <script>
+        // Function to handle the click event and toggle visibility
+        function toggleDetails(cardContainer) {
+            // Close any other flipped cards
+            document.querySelectorAll('.card-container.is-flipped').forEach(flippedCard => {
+                if (flippedCard !== cardContainer) {
+                    flippedCard.classList.remove('is-flipped');
+                }
+            });
+            // Toggle the flip state of the clicked card
+            cardContainer.classList.toggle('is-flipped');
+        }
+
+        // --- Paintbrush Intro Animation Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.getElementById('intro-overlay');
+            const canvas = document.getElementById('paint-canvas');
+            const ctx = canvas.getContext('2d');
+
+            let animationFrameId;
+
+            function setupCanvas() {
+                // Render at a low resolution for a pixelated effect
+                const baseWidth = 480;
+                const aspectRatio = window.innerWidth / window.innerHeight;
+                canvas.width = baseWidth;
+                canvas.height = baseWidth / aspectRatio;
+                // Disable anti-aliasing to get a crisp, pixelated look
+                ctx.imageSmoothingEnabled = false;
+                // Note: The CSS 'image-rendering: pixelated' is the more modern and effective way to handle scaling.
+            }
+
+            function fadeOutAndCleanUp() {
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                }
+                overlay.classList.add('fade-out');
+                setTimeout(() => overlay.remove(), 500);
+            }
+
+            function drawPixelCircle(cx, cy, radius) {
+                // To ensure it's pixelated, we iterate over a bounding box
+                // and draw 1x1 squares (which will look large due to canvas scaling).
+                for (let y = -radius; y <= radius; y++) {
+                    for (let x = -radius; x <= radius; x++) {
+                        // Check if the point is inside the circle using the distance formula
+                        if (x * x + y * y <= radius * radius) {
+                            ctx.fillRect(Math.floor(cx + x), Math.floor(cy + y), 1, 1);
+                        }
+                    }
+                }
+            }
+
+            function animateSplatter() {
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const colors = ['#60a5fa', '#4ade80', '#fb923c']; // Blue, Green, Orange
+                const droplets = [];
+                const dropletCount = 175;
+                const maxDistance = 89;
+                const duration = 1300; // Animation duration in ms
+                let startTime = null;
+
+                // 1. Generate the data for each droplet
+                for (let i = 0; i < dropletCount; i++) {
+                    const angle = Math.random() * 2 * Math.PI;
+                    const distance = Math.random() * maxDistance;
+                    droplets.push({
+                        endX: centerX + Math.cos(angle) * distance,
+                        endY: centerY + Math.sin(angle) * distance,
+                        radius: Math.random() * 5 + 1,
+                        color: colors[Math.floor(Math.random() * colors.length)]
+                    });
+                }
+
+                // 2. Create the animation loop
+                function draw(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    const progress = (timestamp - startTime) / duration;
+
+                    // Clear the canvas for the new frame
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    if (progress < 1) {
+                        droplets.forEach(droplet => {
+                            // Interpolate position from center to end point
+                            const currentX = centerX + (droplet.endX - centerX) * progress;
+                            const currentY = centerY + (droplet.endY - centerY) * progress;
+
+                            ctx.fillStyle = droplet.color;
+                            drawPixelCircle(currentX, currentY, droplet.radius);
+                        });
+                        animationFrameId = requestAnimationFrame(draw);
+                    } else {
+                        // Animation finished, draw final state and fade out
+                        droplets.forEach(droplet => {
+                            ctx.fillStyle = droplet.color;
+                            drawPixelCircle(droplet.endX, droplet.endY, droplet.radius);
+                        });
+                        setTimeout(fadeOutAndCleanUp, 200); // Short delay before fading
+                    }
+                }
+                animationFrameId = requestAnimationFrame(draw);
+            }
+
+            setupCanvas();
+            animateSplatter();
+            overlay.addEventListener('click', fadeOutAndCleanUp);
+            window.addEventListener('resize', setupCanvas);
+
+        // Search functionality
+            const searchBar = document.getElementById('search-bar');
+            const cards = document.querySelectorAll('.card-container');
+
+            searchBar.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+
+                cards.forEach(card => {
+                    const titleElement = card.querySelector('h2');
+                    const descriptionElement = card.querySelector('.card-back p:first-of-type');
+                    if (titleElement && descriptionElement) {
+                        const title = titleElement.textContent.toLowerCase();
+                        const description = descriptionElement.textContent.toLowerCase();
+                        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+
+            // Back to Top button functionality
+            const backToTopBtn = document.getElementById('back-to-top-btn');
+
+            window.addEventListener('scroll', () => {
+                // Show button after scrolling down 300px
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('hidden');
+                } else {
+                    backToTopBtn.classList.add('hidden');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
